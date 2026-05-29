@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PhysicsLab Pro - 记录归纳</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Components Logic & Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d1e4ff",
+                        "tertiary": "#00632e",
+                        "tertiary-container": "#007f3c",
+                        "on-secondary-fixed": "#3a0b00",
+                        "on-primary-fixed": "#001d36",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#0071bc",
+                        "on-surface": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#5adf82",
+                        "outline": "#717882",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#005225",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f7f9fb",
+                        "outline-variant": "#c0c7d3",
+                        "tertiary-fixed": "#78fc9c",
+                        "inverse-primary": "#9ecaff",
+                        "surface-container": "#eceef0",
+                        "surface-tint": "#0061a3",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#00210b",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#c8ffce",
+                        "on-primary-fixed-variant": "#00497c",
+                        "primary-fixed-dim": "#9ecaff",
+                        "on-surface-variant": "#404751",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed": "#ffdbd0",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary": "#ad3300",
+                        "secondary-fixed-dim": "#ffb59e",
+                        "secondary-container": "#ff642d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#005894",
+                        "on-primary-container": "#eaf1ff",
+                        "surface-dim": "#d8dadc",
+                        "background": "#f7f9fb",
+                        "on-secondary-container": "#5a1600",
+                        "on-secondary-fixed-variant": "#842500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "stage-margin": "24px",
+                        "control-panel-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "label-caps": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "data-mono": ["Space Grotesk"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "data-mono": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .filled-icon { font-variation-settings: 'FILL' 1 !important; }
+        .stage-shadow { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .tactile-btn:active { transform: translateY(2px); }
+        .gradient-mesh {
+            background-color: #f7f9fb;
+            background-image: radial-gradient(at 0% 0%, #d1e4ff 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, #ffdbd0 0px, transparent 50%);
+        }
+        .digital-display {
+            background: #191c1e;
+            color: #78fc9c;
+            font-family: 'Space Grotesk', monospace;
+            text-shadow: 0 0 8px rgba(120, 252, 156, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden gradient-mesh min-h-screen">
+<!-- TopAppBar -->
+<nav class="bg-surface-container-low shadow-sm fixed top-0 left-0 w-full z-50 flex justify-between items-center px-stage-margin py-unit h-16">
+<div class="text-headline-sm font-headline-sm font-bold text-primary">PhysicsLab Pro</div>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-caps font-label-caps" href="提出问题.html">提出问题</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-caps font-label-caps" href="lesson-balance.html">动手实验</a>
+<a class="text-secondary border-b-4 border-secondary pb-1 text-label-caps font-label-caps" href="记录归纳.html">记录归纳</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-caps font-label-caps" href="应用验证.html">应用验证</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">help</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs overflow-hidden">
+<img alt="Student Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE7btgng8-ycND5-b7GLbSGDIlobkPwfaQf9xGr0TmOs6CXbq1NNaDMV9-kWeB05_qTXfaRLWHABG0Y_ktw-XvnuqFSwBjy5UKM3ne3gdaRuW1GEgCRDGPDs4GEC1a6099oQNXnnhbpOmMSSmSdzV17RHcT66EjLoKrIpYLE2WpblAx3-AEydYN7zr-DYaYw1Wzo3uCwR18Z52JszG5CvsnHbybGtmMq_i65n1UX6kn14j2Vq5_4Bx30sUSSA3X5KaEOraB-VSQUE"/>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-stage-margin max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-10 text-center md:text-left">
+<h1 class="text-headline-md font-headline-md text-on-surface mb-2">二力平衡：规律探索与归纳</h1>
+<p class="text-on-surface-variant font-body-lg">通过实验记录的数据，总结出使物体保持平衡的关键规律。</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Experiment Record Table -->
+<section class="lg:col-span-8 space-y-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-6 stage-shadow border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">description</span>
+<h2 class="text-headline-sm font-headline-sm">实验数据记录表</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant">
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">实验组合</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">左侧拉力 (N)</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">右侧拉力 (N)</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">作用线状态</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">物体状态</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4 border-b border-outline-variant font-medium">组合 1</td>
+<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
+<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
+<td class="p-4 border-b border-outline-variant">
+<span class="px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary text-xs font-bold">共线</span>
+</td>
+<td class="p-4 border-b border-outline-variant">
+<select class="form-select w-full rounded-lg border-outline-variant text-sm focus:ring-primary focus:border-primary">
+<option selected="">静止 (平衡)</option>
+<option>向左加速</option>
+<option>向右加速</option>
+<option>转动</option>
+</select>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4 border-b border-outline-variant font-medium">组合 2</td>
+<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">30.0</span></td>
+<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
+<td class="p-4 border-b border-outline-variant">
+<span class="px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary text-xs font-bold">共线</span>
+</td>
+<td class="p-4 border-b border-outline-variant">
+<select class="form-select w-full rounded-lg border-outline-variant text-sm focus:ring-primary focus:border-primary">
+<option>静止 (平衡)</option>
+<option>向左加速</option>
+<option selected="">向右加速</option>
+<option>转动</option>
+</select>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4 border-b border-outline-variant font-medium">组合 3</td>
+<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
+<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
+<td class="p-4 border-b border-outline-variant">
+<span class="px-2 py-1 rounded-full bg-error-container/20 text-error text-xs font-bold">不共线</span>
+</td>
+<td class="p-4 border-b border-outline-variant">
+<select class="form-select w-full rounded-lg border-outline-variant text-sm focus:ring-primary focus:border-primary">
+<option>静止 (平衡)</option>
+<option>向左加速</option>
+<option>向右加速</option>
+<option selected="">转动 (非平衡)</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Simulation Visual Hint (Responsive Image) -->
+<div class="relative rounded-xl overflow-hidden stage-shadow aspect-video group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean, professional physics laboratory setup for exploring forces. The image features a digital wooden block on a friction-less surface with two vibrant red vector arrows representing pulling forces in opposite directions. The scene is illuminated with bright, even laboratory lighting. Overlay elements include a high-contrast digital scale and data-mono measurement readouts in a modern, educational tech style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8qUm4nDU4ebWD1k80KMwOjcIT0DukCo9SaZEd37r0z8hvK8RgARcPOIbgfd6OqGib5s_L3vlkCTFh0C9Ey7hz0wq2gul93PkhVTrbUoOi7MdmsExi4ssCw0FYIbFPNnN9hF6eiqEjo1MTNj_VfuW_ErC6IWw87PCRGq07OYV9tvqWKDlnxT_2yhtFwS8yN6GS_-dmehQeSNtKXlbFJ-Wt97FenhB1jhSfhEdrwF5RpeVr15Qrkq-SPazKfMfZFZnfFsIXw2rbj8w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<div class="text-white">
+<p class="font-bold text-lg mb-1">回顾实验场景</p>
+<p class="text-sm opacity-80">保持左侧 50N，调节右侧力并观察矢量箭头的变化。</p>
+</div>
+</div>
+<button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/90 text-white w-16 h-16 rounded-full flex items-center justify-center tactile-btn shadow-lg">
+<span class="material-symbols-outlined text-4xl filled-icon">play_arrow</span>
+</button>
+</div>
+</section>
+<!-- Right: Induction Section -->
+<section class="lg:col-span-4 space-y-gutter">
+<div class="bg-surface-container-high rounded-xl p-6 border border-outline-variant/30 sticky top-24">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">归纳发现</h2>
+</div>
+<p class="text-on-surface-variant text-sm mb-6">要使物体保持平衡，二力必须满足以下哪些条件？（勾选你的发现）</p>
+<div class="space-y-3">
+<!-- Condition Card 1 -->
+<label class="group cursor-pointer block">
+<input class="hidden peer" type="checkbox"/>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-container/5 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant peer-checked:bg-primary peer-checked:text-white transition-colors">
+<span class="material-symbols-outlined">join_inner</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">同体</div>
+<div class="text-xs text-on-surface-variant">作用在同一个物体上</div>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</div>
+</label>
+<!-- Condition Card 2 -->
+<label class="group cursor-pointer block">
+<input class="hidden peer" type="checkbox"/>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-container/5 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant peer-checked:bg-primary peer-checked:text-white transition-colors">
+<span class="material-symbols-outlined">balance</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">等大</div>
+<div class="text-xs text-on-surface-variant">两个力的大小必须相等</div>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</div>
+</label>
+<!-- Condition Card 3 -->
+<label class="group cursor-pointer block">
+<input class="hidden peer" type="checkbox"/>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-container/5 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant peer-checked:bg-primary peer-checked:text-white transition-colors">
+<span class="material-symbols-outlined">swap_horiz</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">反向</div>
+<div class="text-xs text-on-surface-variant">两个力的方向必须相反</div>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</div>
+</label>
+<!-- Condition Card 4 -->
+<label class="group cursor-pointer block">
+<input class="hidden peer" type="checkbox"/>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-container/5 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant peer-checked:bg-primary peer-checked:text-white transition-colors">
+<span class="material-symbols-outlined">straighten</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">共线</div>
+<div class="text-xs text-on-surface-variant">作用在同一条直线上</div>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</div>
+</label>
+</div>
+<div class="mt-8">
+<button class="w-full bg-primary text-white font-bold py-3 px-6 rounded-full tactile-btn shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span>提交实验报告</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-center items-center h-16 bg-surface-container-lowest shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl px-4 gap-4">
+<div class="flex-1 flex flex-col items-center text-on-surface-variant px-2 py-1">
+<span class="material-symbols-outlined">trending_flat</span>
+<span class="text-[10px] font-label-caps mt-1">Forces</span>
+</div>
+<div class="flex-1 flex flex-col items-center text-on-surface-variant px-2 py-1">
+<span class="material-symbols-outlined">speed</span>
+<span class="text-[10px] font-label-caps mt-1">Velocity</span>
+</div>
+<div class="flex-1 flex flex-col items-center bg-secondary-container text-on-secondary-container rounded-full py-2 px-4 scale-90">
+<span class="material-symbols-outlined filled-icon">numbers</span>
+<span class="text-[10px] font-label-caps mt-1 font-bold">Values</span>
+</div>
+<div class="flex-1 flex flex-col items-center text-on-surface-variant px-2 py-1">
+<span class="material-symbols-outlined">weight</span>
+<span class="text-[10px] font-label-caps mt-1">Masses</span>
+</div>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    const card = this.closest('div');
+                    // Add a tiny "pop" animation
+                    this.nextElementSibling.classList.add('scale-105');
+                    setTimeout(() => {
+                        this.nextElementSibling.classList.remove('scale-105');
+                    }, 100);
+                }
+            });
+        });
+    </script>
+</body></html>

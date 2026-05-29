@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PhysicsLab Pro - 应用验证</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .step-active {
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--tw-primary);
+        }
+        .mechanical-press:active {
+            transform: translateY(2px);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .vector-arrow {
+            position: relative;
+            height: 2px;
+            background: #ff642d;
+        }
+        .vector-arrow::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: -4px;
+            border-left: 8px solid #ff642d;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d1e4ff",
+                        "tertiary": "#00632e",
+                        "tertiary-container": "#007f3c",
+                        "on-secondary-fixed": "#3a0b00",
+                        "on-primary-fixed": "#001d36",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#0071bc",
+                        "on-surface": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#5adf82",
+                        "outline": "#717882",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#005225",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-bright": "#f7f9fb",
+                        "outline-variant": "#c0c7d3",
+                        "tertiary-fixed": "#78fc9c",
+                        "inverse-primary": "#9ecaff",
+                        "surface-container": "#eceef0",
+                        "surface-tint": "#0061a3",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#00210b",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#c8ffce",
+                        "on-primary-fixed-variant": "#00497c",
+                        "primary-fixed-dim": "#9ecaff",
+                        "on-surface-variant": "#404751",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed": "#ffdbd0",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary": "#ad3300",
+                        "secondary-fixed-dim": "#ffb59e",
+                        "secondary-container": "#ff642d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#005894",
+                        "on-primary-container": "#eaf1ff",
+                        "surface-dim": "#d8dadc",
+                        "background": "#f7f9fb",
+                        "on-secondary-container": "#5a1600",
+                        "on-secondary-fixed-variant": "#842500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "stage-margin": "24px",
+                        "control-panel-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "label-caps": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "data-mono": ["Space Grotesk"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "data-mono": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-container-low dark:bg-inverse-surface shadow-sm fixed top-0 flex justify-between items-center w-full px-stage-margin py-unit max-w-full z-50 h-16">
+<div class="flex items-center gap-4">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed">PhysicsLab Pro</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed text-label-caps font-label-caps transition-colors duration-200" href="提出问题.html">提出问题</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed text-label-caps font-label-caps transition-colors duration-200" href="lesson-balance.html">动手实验</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed text-label-caps font-label-caps transition-colors duration-200" href="记录归纳.html">记录归纳</a>
+<a class="text-secondary dark:text-secondary-fixed-dim border-b-4 border-secondary dark:border-secondary-fixed-dim pb-1 text-label-caps font-label-caps" href="应用验证.html">应用验证</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full">settings</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden border-2 border-primary-fixed">
+<img alt="Student Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIhmgyJ0c8VTNySIDgEHjC3GGgYCvswsnprhIBBfwUaBontinBmx7-jRPL12Hs9z3enq3L-xnhixee8tAkSj_J7lKV5l32lXcvptuarx-TyaAfGqyZoFCoj83RDCbfyjPDXPY9OyaWkA2p3As3Mz42wUMzk6iU5XFmz2YN3INthZ-6efKp4dTLfoNW7Y7vbQV9tG3qswrLEEd4BhkXf1lL235byAkNqzzuTiOXaqsAOSNSYJAHEYRBAbOVn3dVOAT9TK8DfgmfmUY"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-surface-container-high dark:bg-inverse-surface shadow-md w-control-panel-width hidden lg:flex">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">science</span>
+<span class="text-label-caps font-label-caps font-black text-on-surface">JUNIOR LAB</span>
+</div>
+<p class="text-on-surface-variant text-sm">Level 1: Mechanics</p>
+</div>
+<div class="flex-1 px-2 space-y-1">
+<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
+<span class="material-symbols-outlined">science</span>
+<span class="text-label-caps font-label-caps">力学实验</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-label-caps font-label-caps">光学探究</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-label-caps font-label-caps">电磁工作台</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
+<span class="material-symbols-outlined">thermostat</span>
+<span class="text-label-caps font-label-caps">热学实验室</span>
+</button>
+</div>
+<div class="p-4 bg-primary-fixed rounded-2xl m-4">
+<p class="text-sm font-bold text-on-primary-fixed-variant mb-2">掌握进度</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<p class="text-xs mt-2 text-on-primary-fixed-variant">85% - 二力平衡高手</p>
+</div>
+<footer class="p-2 border-t border-outline-variant">
+<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant rounded-xl">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-caps font-label-caps">Help</span>
+</button>
+</footer>
+</aside>
+<!-- Main Content Area -->
+<main class="pt-24 pb-20 px-6 lg:ml-control-panel-width min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="mb-10 animate-in fade-in slide-in-from-top-4 duration-700">
+<h1 class="text-display-lg font-display-lg text-primary mb-2">应用验证：身边的平衡</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">通过刚才的实验，我们发现了二力平衡的四个要素：等大、反向、共线、同体。现在，让我们来验证你是否能在现实世界中认出它们！</p>
+</div>
+<!-- Quiz Grid: Lifestyle Scenarios -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+<!-- Question 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow group cursor-pointer" onclick="toggleSelection(this)">
+<div class="aspect-video bg-surface-container-low rounded-xl mb-4 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A detailed digital illustration of a thick hardcover textbook resting perfectly flat on a polished light wood table surface. The scene is brightly lit from above, emphasizing a clean minimalist aesthetic. Subtle vector arrows show a red arrow pointing down for gravity and a blue arrow pointing up for support force, both perfectly aligned and equal in length." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtTHcXNYvKHTJMIT7PfBwSSHzpijjaXlITPXurPTEKDyIPl1OFlnEtzORQod1BudiP-YtxDKd_b-dez7lqnsbCDa2Xn0Z_JpTK9vYW0kYhASJTIy60xE9nT0hFQ4INMooBvam5MRUwU-4RpMGi3FBMBCFabPl1uFP_xUf0anJBshsNiq9houEcsylaXfdbhB4NyQj7l7-aTljXKx0MVbsUd2H0h_BsBbg92R2cXv-wcaikuhCJ5pu6VPYNiPM9yW_Q8zFK3Z_H2rQ"/>
+<div class="absolute top-2 left-2 bg-primary px-3 py-1 rounded-full text-white text-xs font-bold">场景 1</div>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">静止在桌上的书</h3>
+<p class="text-body-md text-on-surface-variant mb-4">分析：重力和桌面的支持力。</p>
+<div class="flex items-center justify-between">
+<span class="selection-status text-primary font-bold opacity-0 transition-opacity">已选择</span>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="inner-circle w-3 h-3 rounded-full bg-primary opacity-0"></div>
+</div>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow group cursor-pointer" onclick="toggleSelection(this)">
+<div class="aspect-video bg-surface-container-low rounded-xl mb-4 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant digital graphic of a colorful diamond-shaped kite flying high against a clear blue sky. White clouds drift lazily in the background. The kite is captured mid-flight, slightly swaying with the wind. Vector arrows indicate the tension from the string and the aerodynamic lift force, which are not aligned in a straight line, suggesting motion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-noL7NcpiIomB-OMqQy6-sRdFL41-YjSF1eDfS-iwuO4_DfdL1X6qZGUNndP_gwz0HyRSrdTJqwNwXvVB1ajMjFd9l2R9pus2ENR1pK9tCdoAAhM0BCSTu98Er5lP_7sR625holjXiwaIlnJ-_YS7CZysTIeTfAjZe98VIKTiFIqSNAPNCJxWq27zT3-roxOhLk7LsbwM33PgV5LBGWACrWO_COZ9e2ercQdf9d1eV1lfbpNEB8laFSI51yDmccZjkDYhv_lVfAQ"/>
+<div class="absolute top-2 left-2 bg-primary px-3 py-1 rounded-full text-white text-xs font-bold">场景 2</div>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">风中飘荡的风筝</h3>
+<p class="text-body-md text-on-surface-variant mb-4">分析：风力、重力和线的拉力。</p>
+<div class="flex items-center justify-between">
+<span class="selection-status text-primary font-bold opacity-0 transition-opacity">已选择</span>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="inner-circle w-3 h-3 rounded-full bg-primary opacity-0"></div>
+</div>
+</div>
+</div>
+<!-- Question 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow group cursor-pointer" onclick="toggleSelection(this)">
+<div class="aspect-video bg-surface-container-low rounded-xl mb-4 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic, low-angle shot of a thick, tensioned tug-of-war rope stretched horizontally across a muddy competition field. The center mark of the rope is perfectly stationary between two lines. The lighting is dramatic, focusing on the frayed fibers of the rope under extreme stress. Two opposing red vector arrows show equal and opposite horizontal tension forces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByCxjQteegUA5rGSKIrNRSwBxCQPrXXnC9FYNclCBbFfKoNxjRE9wTSIuvOFFtqBMRmg5ShRyaHax0l14nnhcyJlunjXCoffcW0XDo7BTfAL75rWtqvr3tO-GcmOBXA3eldVUiCPQPygvkUnI_xRmUfIkaTUKZpip4eiy7yJ1UMEib47wWGq3i8QK_oV8CrgKMbIlilCDw0STInoxqyJ3sFlOQvXfrlRLTEyPGfkI4n2jKaldMvwu8T6gE4afG6krfbzPpQuPi7Ro"/>
+<div class="absolute top-2 left-2 bg-primary px-3 py-1 rounded-full text-white text-xs font-bold">场景 3</div>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">僵持不动的拔河绳</h3>
+<p class="text-body-md text-on-surface-variant mb-4">分析：左右两侧选手的拉力。</p>
+<div class="flex items-center justify-between">
+<span class="selection-status text-primary font-bold opacity-0 transition-opacity">已选择</span>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="inner-circle w-3 h-3 rounded-full bg-primary opacity-0"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Section: Interaction vs Balance -->
+<section class="bg-white rounded-3xl p-8 mb-16 shadow-lg border-2 border-primary-fixed relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">compare_arrows</span>
+</div>
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="flex-1">
+<span class="bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-label-caps font-label-caps mb-4 inline-block">深度思考</span>
+<h2 class="text-headline-md font-headline-md text-on-surface mb-6">易错辨析：平衡力 vs 相互作用力</h2>
+<p class="text-body-lg text-on-surface-variant mb-6">
+                            很多同学会把“书对桌面的压力”和“桌面对书的支持力”当成平衡力。
+                            <span class="font-bold text-secondary">这是错误的！</span>
+</p>
+<div class="space-y-4">
+<div class="flex gap-4 p-4 bg-surface rounded-xl border-l-4 border-error">
+<span class="material-symbols-outlined text-error">close</span>
+<div>
+<p class="font-bold">压力 vs 支持力</p>
+<p class="text-sm">它们分别作用在<span class="underline">桌面</span>和<span class="underline">书</span>上，作用在**两个物体**上，不符合“同体”要求。</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 bg-surface rounded-xl border-l-4 border-tertiary">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<div>
+<p class="font-bold">重力 vs 支持力</p>
+<p class="text-sm">它们都作用在<span class="underline">书</span>这**同一个物体**上。这才是真正的二力平衡！</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 w-full max-w-md bg-surface-container rounded-2xl p-6 shadow-inner border border-outline-variant">
+<div class="flex flex-col items-center gap-8 py-10">
+<!-- Interaction Diagram -->
+<div class="relative w-full flex justify-center">
+<div class="w-48 h-8 bg-surface-container-highest border-2 border-outline rounded-sm flex items-center justify-center relative">
+                                    书 (Object)
+                                    <!-- Gravity Vector -->
+<div class="absolute top-1/2 left-1/2 w-[2px] h-16 bg-primary -translate-x-1/2 flex items-end">
+<div class="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[10px] border-l-transparent border-r-transparent border-t-primary translate-y-2"></div>
+<span class="absolute -bottom-10 left-4 text-xs font-bold text-primary whitespace-nowrap">G (重力)</span>
+</div>
+<!-- Support Vector -->
+<div class="absolute top-1/2 left-1/2 w-[2px] h-16 bg-secondary -translate-x-1/2 -translate-y-full flex items-start">
+<div class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-secondary -translate-y-2"></div>
+<span class="absolute -top-10 left-4 text-xs font-bold text-secondary whitespace-nowrap">F支 (支持力)</span>
+</div>
+</div>
+<div class="w-64 h-2 bg-on-surface-variant mt-32"></div>
+</div>
+<p class="text-center text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest pt-4">二力平衡：同体共线</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA / Submit -->
+<div class="flex justify-center mb-24">
+<button class="bg-primary text-white px-10 py-4 rounded-full font-headline-sm mechanical-press shadow-lg hover:bg-primary-container transition-all flex items-center gap-3" onclick="showCompletion()">
+                    提交验证
+                    <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Success Overlay / Modal -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" id="success-overlay">
+<div class="absolute inset-0 bg-on-surface/60 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-[40px] p-12 max-w-xl w-full text-center shadow-2xl animate-in zoom-in-95 duration-300">
+<div class="w-32 h-32 bg-tertiary-fixed rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+<span class="material-symbols-outlined text-tertiary text-6xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<h2 class="text-display-lg font-display-lg text-on-surface mb-4">恭喜完成探究！</h2>
+<p class="text-body-lg text-on-surface-variant mb-10">你已经完美掌握了二力平衡的奥秘。在力学的世界里，你已经具备了洞察平衡的高级视野！</p>
+<div class="flex flex-col gap-4">
+<button class="bg-primary text-white py-4 rounded-2xl font-bold mechanical-press flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                    下载荣誉证书
+                </button>
+<button class="text-primary font-bold py-2 hover:underline" onclick="hideCompletion()">继续探索更多实验</button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-center items-center gap-gutter h-16 px-4 bg-surface-container-lowest shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center flex-1 py-1 text-on-surface-variant">
+<span class="material-symbols-outlined">trending_flat</span>
+<span class="text-[10px] font-label-caps">Forces</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 py-1 text-on-surface-variant">
+<span class="material-symbols-outlined">speed</span>
+<span class="text-[10px] font-label-caps">Velocity</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 py-1 bg-secondary-container text-on-secondary-container rounded-full px-4">
+<span class="material-symbols-outlined">numbers</span>
+<span class="text-[10px] font-label-caps">Values</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 py-1 text-on-surface-variant">
+<span class="material-symbols-outlined">weight</span>
+<span class="text-[10px] font-label-caps">Masses</span>
+</button>
+</nav>
+<script>
+        function toggleSelection(el) {
+            // Unselect others (simplified for demo)
+            const wasActive = el.classList.contains('border-primary');
+            
+            if (wasActive) {
+                el.classList.remove('border-primary', 'bg-primary-container/10');
+                el.querySelector('.inner-circle').classList.add('opacity-0');
+                el.querySelector('.selection-status').classList.add('opacity-0');
+            } else {
+                el.classList.add('border-primary', 'bg-primary-container/10');
+                el.querySelector('.inner-circle').classList.remove('opacity-0');
+                el.querySelector('.selection-status').classList.remove('opacity-0');
+            }
+        }
+
+        function showCompletion() {
+            document.getElementById('success-overlay').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Trigger confetti effect (visual only)
+            createConfetti();
+        }
+
+        function hideCompletion() {
+            document.getElementById('success-overlay').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function createConfetti() {
+            const colors = ['#005894', '#ff642d', '#007f3c', '#ffb59e'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '8px';
+                confetti.style.height = '8px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.borderRadius = '2px';
+                confetti.style.zIndex = '101';
+                confetti.style.transition = 'transform ' + (Math.random() * 2 + 1) + 's linear, opacity ' + (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+                    confetti.style.opacity = '0';
+                }, 10);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+    </script>
+</body></html>

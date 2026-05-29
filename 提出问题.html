@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PhysicsLab Pro - 提出问题</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shadow-tactile {
+            box-shadow: 0 4px 0 0 rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .shadow-tactile:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.05), 0 5px 10px -3px rgba(0,0,0,0.1);
+        }
+        .digital-display {
+            background: #191c1e;
+            color: #78fc9c;
+            font-family: 'Space Grotesk', monospace;
+            border: 2px solid #404751;
+        }
+        .stage-grid {
+            background-size: 40px 40px;
+            background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d1e4ff",
+                        "tertiary": "#00632e",
+                        "tertiary-container": "#007f3c",
+                        "on-secondary-fixed": "#3a0b00",
+                        "on-primary-fixed": "#001d36",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#0071bc",
+                        "on-surface": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#5adf82",
+                        "outline": "#717882",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#005225",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f7f9fb",
+                        "outline-variant": "#c0c7d3",
+                        "tertiary-fixed": "#78fc9c",
+                        "inverse-primary": "#9ecaff",
+                        "surface-container": "#eceef0",
+                        "surface-tint": "#0061a3",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#00210b",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#c8ffce",
+                        "on-primary-fixed-variant": "#00497c",
+                        "primary-fixed-dim": "#9ecaff",
+                        "on-surface-variant": "#404751",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed": "#ffdbd0",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary": "#ad3300",
+                        "secondary-fixed-dim": "#ffb59e",
+                        "secondary-container": "#ff642d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#005894",
+                        "on-primary-container": "#eaf1ff",
+                        "surface-dim": "#d8dadc",
+                        "background": "#f7f9fb",
+                        "on-secondary-container": "#5a1600",
+                        "on-secondary-fixed-variant": "#842500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "stage-margin": "24px",
+                        "control-panel-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "label-caps": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "data-mono": ["Space Grotesk"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "data-mono": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-bright dark:bg-surface-dim shadow-sm docked full-width top-0 z-50 flex justify-between items-center w-full px-stage-margin py-unit max-w-full">
+<div class="flex items-center gap-4">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed">PhysicsLab Pro</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-label-caps font-label-caps text-secondary dark:text-secondary-fixed-dim border-b-4 border-secondary dark:border-secondary-fixed-dim pb-1" href="提出问题.html">提出问题</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="lesson-balance.html">动手实验</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="记录归纳.html">记录归纳</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="应用验证.html">应用验证</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container transition-colors">help</button>
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container transition-colors">settings</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden">
+<img alt="Student Profile Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_BbyqSMsVOxhsjmpzlffSq5SIxlIvbLUw-HUwNT8UxLAL7dD5_UzLyKE0evfn1HmXyVKklP0BaVZPoYkw6wIp_cRgFTUdUgsxHvagMJr4NPJ6WIh9XEldTU0H7DhRda7Es8jm8UT_Gb4VD5yTWVvGGIHbQPPfJqfsHPW3eMRUH0uEEoBl18FLJ2OIXDK2CvArBMEsD0QgFWSRQpLEPU94KBY0D2gT5eJDkUDRZPkHBUjfEr3AfcsgmEZEFwNT3bzuEdVyTY5oDKU"/>
+</div>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-surface-container-highest dark:bg-inverse-surface w-control-panel-width shadow-md">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary text-3xl">science</span>
+<span class="text-label-caps font-label-caps font-black text-on-surface">Junior Lab</span>
+</div>
+<p class="text-xs text-on-surface-variant">Level 1: Mechanics</p>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<div class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl m-2 p-3 flex items-center gap-4 translate-x-1 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined">science</span>
+<span class="text-label-caps font-label-caps">力学实验</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-label-caps font-label-caps">光学探究</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-label-caps font-label-caps">电磁工作台</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">thermostat</span>
+<span class="text-label-caps font-label-caps">热学实验室</span>
+</div>
+</nav>
+<div class="p-4 border-t border-outline-variant/30">
+<button class="w-full bg-secondary py-3 px-4 rounded-xl text-white font-bold shadow-tactile hover:brightness-110 active:scale-95 transition-all">
+                    Start Simulation
+                </button>
+</div>
+<div class="p-2 flex flex-col gap-1">
+<div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-caps font-label-caps">Help</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">history</span>
+<span class="text-label-caps font-label-caps">History</span>
+</div>
+</div>
+</aside>
+<!-- Main Content (The Stage) -->
+<main class="flex-1 ml-control-panel-width mt-0 p-stage-margin flex flex-col gap-stage-margin relative overflow-y-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-on-surface-variant">
+<span class="text-label-caps font-label-caps">物理实验库</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-label-caps font-label-caps">力学</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-label-caps font-label-caps text-primary">二力平衡探究</span>
+</nav>
+<div class="grid grid-cols-12 gap-gutter flex-1">
+<!-- Simulation Canvas Area -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<div class="bg-white rounded-3xl shadow-tactile flex-1 relative stage-grid overflow-hidden border border-surface-container-highest">
+<!-- Scene: The Desktop -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative group">
+<!-- Desk Surface (Book Scene) -->
+<div id="deskSurface" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-4 bg-surface-container-high rounded-full blur-sm opacity-50"></div>
+<!-- Ceiling Line (Lamp Scene) -->
+<div id="ceilingLine" class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-1 bg-surface-container-high opacity-0 transition-opacity duration-300"></div>
+
+<!-- Scene Display Container -->
+<div id="sceneDisplay" class="relative z-10">
+  <!-- Book Scene -->
+  <div id="bookScene" class="relative w-48 h-64 bg-primary-container rounded-lg shadow-2xl transform perspective-1000 rotate-x-12 flex flex-col items-center justify-center border-2 border-primary group-hover:-translate-y-2 transition-transform duration-500 cursor-grab active:cursor-grabbing">
+    <div class="w-32 h-40 bg-white/10 rounded flex flex-col p-4 gap-2">
+      <div class="w-full h-2 bg-white/20 rounded"></div>
+      <div class="w-3/4 h-2 bg-white/20 rounded"></div>
+      <div class="w-1/2 h-2 bg-white/20 rounded"></div>
+    </div>
+    <span class="mt-4 text-on-primary-container font-headline-sm font-bold opacity-80">PHYSICS</span>
+  </div>
+
+  <!-- Lamp Scene (Hidden by default) -->
+  <div id="lampScene" class="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <!-- Lamp String -->
+    <div class="absolute top-0 w-1 h-20 bg-surface-container-high"></div>
+    <!-- Lamp Bulb -->
+    <div class="relative w-24 h-24 bg-yellow-300 rounded-full shadow-2xl flex items-center justify-center border-2 border-yellow-400">
+      <!-- Bulb shine -->
+      <div class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-200 to-transparent opacity-40"></div>
+      <!-- Filament -->
+      <svg class="absolute w-8 h-8" viewBox="0 0 100 100">
+        <path d="M50 20 Q40 30 40 40 Q40 50 50 50 Q60 50 60 40 Q60 30 50 20" stroke="currentColor" stroke-width="2" fill="none" class="text-yellow-700" />
+      </svg>
+    </div>
+    <!-- Lamp base -->
+    <div class="absolute -bottom-16 w-32 h-8 bg-surface-container-high rounded-lg opacity-50"></div>
+  </div>
+</div>
+<!-- Vector Indicator (Subtle) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
+<div class="w-1 h-12 bg-error rounded-full relative">
+<div class="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 border-t-2 border-l-2 border-error rotate-45"></div>
+</div>
+<span class="text-[10px] font-bold text-error uppercase mt-1">N (Normal)</span>
+</div>
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
+<span class="text-[10px] font-bold text-secondary uppercase mb-1">G (Gravity)</span>
+<div class="w-1 h-12 bg-secondary rounded-full relative">
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-3 border-b-2 border-r-2 border-secondary rotate-45"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Atmospheric Label -->
+<div class="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur rounded-full border border-primary/20">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span class="text-label-caps font-label-caps text-primary">观察中：平衡态物体</span>
+</div>
+<!-- Zoom Controls -->
+<div class="absolute bottom-6 left-6 flex flex-col gap-2">
+<button class="w-10 h-10 bg-white rounded-xl shadow-sm border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-white rounded-xl shadow-sm border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+</div>
+<!-- Readout Panel -->
+<div class="bg-surface-container rounded-2xl p-6 flex items-center gap-8 shadow-sm">
+<div class="flex-1 space-y-2">
+<p class="text-label-caps font-label-caps text-on-surface-variant">当前状态</p>
+<div class="text-headline-sm font-headline-sm text-on-surface">保持静止 (Static)</div>
+</div>
+<div class="h-12 w-px bg-outline-variant/30"></div>
+<div class="flex-1 space-y-2">
+<p class="text-label-caps font-label-caps text-on-surface-variant">受力总和</p>
+<div class="digital-display px-4 py-2 rounded-lg text-xl font-bold tracking-widest">
+                                ΣF = 0.00 N
+                            </div>
+</div>
+</div>
+</div>
+<!-- Guidance & Inquiry Panel -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Inquiry Card -->
+<div class="bg-white rounded-3xl p-8 shadow-tactile border-t-4 border-primary flex-1 flex flex-col">
+<div class="bg-primary-fixed w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-4xl">lightbulb</span>
+</div>
+<h2 class="text-headline-md font-headline-md text-on-surface mb-6 leading-tight">
+                            为什么书本能乖乖呆在桌上？
+                        </h2>
+<div class="space-y-6 flex-1">
+<p class="text-body-lg font-body-lg text-on-surface-variant italic leading-relaxed">
+                                “生活中，很多物体虽然受力，但依然保持静止。比如桌上的书、天花板下的灯。”
+                            </p>
+<div class="p-4 bg-surface-container-low rounded-2xl border-l-4 border-tertiary">
+<p class="text-body-lg font-body-lg font-medium text-on-surface">
+                                    你觉得，这些物体在什么受力条件下会保持这种<span class="text-tertiary underline decoration-2 underline-offset-4">“平衡状态”</span>呢？
+                                </p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div id="bookCard" class="bg-surface-container rounded-xl p-4 flex flex-col items-center text-center gap-2 group cursor-pointer hover:bg-primary-fixed transition-colors ring-2 ring-transparent hover:ring-primary" onclick="switchScene('book')">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">book</span>
+<span class="text-xs font-bold uppercase">桌上的书</span>
+</div>
+<div id="lampCard" class="bg-surface-container rounded-xl p-4 flex flex-col items-center text-center gap-2 group cursor-pointer hover:bg-primary-fixed transition-colors ring-2 ring-transparent hover:ring-primary" onclick="switchScene('lamp')">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">tungsten</span>
+<span class="text-xs font-bold uppercase">悬挂的灯</span>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full bg-primary text-white py-5 rounded-2xl text-xl font-bold flex items-center justify-center gap-3 shadow-tactile hover:scale-[1.02] active:scale-95 transition-all" onclick="location.reload()">
+<span>开始探究</span>
+<span class="material-symbols-outlined">rocket_launch</span>
+</button>
+<p class="text-center mt-4 text-xs font-label-caps text-outline uppercase tracking-widest">点击进入“动手实验”环节</p>
+</div>
+</div>
+<!-- Secondary Info -->
+<div class="bg-tertiary-container rounded-2xl p-4 text-on-tertiary-container flex items-start gap-4">
+<span class="material-symbols-outlined">info</span>
+<div class="text-sm">
+<p class="font-bold mb-1">实验小贴士</p>
+<p class="opacity-80">二力平衡是指物体受到两个力的作用而保持静止或匀速直线运动状态。</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<footer class="md:hidden bg-surface-container-lowest dark:bg-on-surface fixed bottom-0 left-0 w-full z-50 flex justify-center items-center gap-gutter h-16 px-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl">
+<div class="bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-6 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined">trending_flat</span>
+<span class="text-label-caps font-label-caps">Forces</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant px-6 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined">speed</span>
+<span class="text-label-caps font-label-caps">Velocity</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant px-6 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined">numbers</span>
+<span class="text-label-caps font-label-caps">Values</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant px-6 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined">weight</span>
+<span class="text-label-caps font-label-caps">Masses</span>
+</div>
+</footer>
+<script>
+        // Scene Switching
+        let currentScene = 'book';
+        
+        function switchScene(scene) {
+            currentScene = scene;
+            const bookScene = document.getElementById('bookScene');
+            const lampScene = document.getElementById('lampScene');
+            const deskSurface = document.getElementById('deskSurface');
+            const ceilingLine = document.getElementById('ceilingLine');
+            const bookCard = document.getElementById('bookCard');
+            const lampCard = document.getElementById('lampCard');
+            
+            if (scene === 'book') {
+                // Show book scene
+                bookScene.style.opacity = '1';
+                bookScene.style.pointerEvents = 'auto';
+                lampScene.style.opacity = '0';
+                lampScene.style.pointerEvents = 'none';
+                deskSurface.style.opacity = '0.5';
+                ceilingLine.style.opacity = '0';
+                
+                // Update card styles
+                bookCard.classList.add('ring-primary', 'bg-primary-fixed');
+                bookCard.classList.remove('ring-transparent');
+                lampCard.classList.remove('ring-primary', 'bg-primary-fixed');
+                lampCard.classList.add('ring-transparent');
+            } else if (scene === 'lamp') {
+                // Show lamp scene
+                bookScene.style.opacity = '0';
+                bookScene.style.pointerEvents = 'none';
+                lampScene.style.opacity = '1';
+                lampScene.style.pointerEvents = 'auto';
+                deskSurface.style.opacity = '0';
+                ceilingLine.style.opacity = '1';
+                
+                // Update card styles
+                lampCard.classList.add('ring-primary', 'bg-primary-fixed');
+                lampCard.classList.remove('ring-transparent');
+                bookCard.classList.remove('ring-primary', 'bg-primary-fixed');
+                bookCard.classList.add('ring-transparent');
+            }
+        }
+        
+        // Initialize with book scene
+        switchScene('book');
+        
+        // Simple micro-interaction for the "Start" button
+        document.querySelector('button.bg-primary').addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(2px) scale(0.98)';
+        });
+        document.querySelector('button.bg-primary').addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(0) scale(1.02)';
+        });
+        
+        // Dynamic Book Interaction
+        const sceneDisplay = document.getElementById('sceneDisplay');
+        const bookScene = document.getElementById('bookScene');
+        bookScene.addEventListener('mousedown', () => {
+            bookScene.classList.replace('cursor-grab', 'cursor-grabbing');
+        });
+        document.addEventListener('mouseup', () => {
+            if (bookScene.classList.contains('cursor-grabbing')) {
+                bookScene.classList.replace('cursor-grabbing', 'cursor-grab');
+            }
+        });
+    </script>
+</body></html>
