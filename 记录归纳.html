@@ -304,7 +304,7 @@
 </label>
 </div>
 <div class="mt-8">
-<button class="w-full bg-primary text-white font-bold py-3 px-6 rounded-full tactile-btn shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<button onclick="window.location.href='应用验证.html'" class="w-full bg-primary text-white font-bold py-3 px-6 rounded-full tactile-btn shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
 <span>提交实验报告</span>
 <span class="material-symbols-outlined">send</span>
 </button>
@@ -356,17 +356,24 @@
     if (!tbody || records.length === 0) return;
 
     // Table
-    tbody.innerHTML = records.map((r, idx) => `
+    tbody.innerHTML = records.map((r, idx) => {
+        const netDisplay = r.net === '/' ? '/' : r.net + ' N';
+        const statusClass = r.status === '\u5e73\u8861'
+            ? 'bg-tertiary-fixed text-on-tertiary-fixed'
+            : r.status === '\u2014' || r.status === '—'
+                ? 'bg-surface-container text-on-surface-variant'
+                : 'bg-error-container text-on-error-container';
+        return `
         <tr class="hover:bg-surface-container-low transition-colors duration-150">
             <td class="p-4 border-b border-outline-variant font-medium">${idx + 1}</td>
             <td class="p-4 border-b border-outline-variant">${r.left}</td>
             <td class="p-4 border-b border-outline-variant">${r.right}</td>
-            <td class="p-4 border-b border-outline-variant text-data-mono">${r.net} N</td>
+            <td class="p-4 border-b border-outline-variant text-data-mono">${netDisplay}</td>
             <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-full ${r.collinear === '\u662f' ? 'bg-tertiary-container/10 text-tertiary' : 'bg-error-container/20 text-error'} text-xs font-bold">${r.collinear === '\u662f' ? '\u5171\u7ebf' : '\u4e0d\u5171\u7ebf'}</span></td>
             <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-full ${r.sameBody === '\u662f' ? 'bg-tertiary-container/10 text-tertiary' : 'bg-error-container/20 text-error'} text-xs font-bold">${r.sameBody === '\u662f' ? '\u540c\u4f53' : '\u4e0d\u540c\u4f53'}</span></td>
-            <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-lg ${r.status === '\u5e73\u8861' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-error-container text-on-error-container'}">${r.status}</span></td>
-        </tr>
-    `).join('');
+            <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-lg ${statusClass}">${r.status}</span></td>
+        </tr>`;
+    }).join('');
 
     // Diagrams
     if (!diagrams) return;
@@ -380,33 +387,15 @@
         const f1Rad = f1Deg * Math.PI / 180;
         const f2Rad = f2Deg * Math.PI / 180;
         const isBalanced = r.status === '\u5e73\u8861';
-        const statusColor = isBalanced ? '#00632e' : '#ba1a1a';
+        const isDiffBody = r.sameBody === '\u5426';
+        const statusColor = isBalanced ? '#00632e' : isDiffBody ? '#ba1a1a' : '#ba1a1a';
         const statusIcon = isBalanced ? '\u2713' : '\u2717';
+        const statusText = isDiffBody ? '\u4e0d\u540c\u4f53\uff0c\u4e0d\u662f\u5e73\u8861\u529b' : r.status;
 
-        // Arrow length proportional to force (12px per N)
         const scale = 12;
-        const f1Len = f1Val * scale;
-        const f2Len = f2Val * scale;
 
-        // Block center at (250,95), block 100x44
-        const cx = 250, cy = 95;
-        const bw = 50, bh = 22;
-
-        const f1StartX = cx + bw * Math.cos(f1Rad);
-        const f1StartY = cy + bh * Math.sin(f1Rad);
-        const f1EndX = f1StartX + f1Len * Math.cos(f1Rad);
-        const f1EndY = f1StartY + f1Len * Math.sin(f1Rad);
-
-        const f2StartX = cx + bw * Math.cos(f2Rad);
-        const f2StartY = cy + bh * Math.sin(f2Rad);
-        const f2EndX = f2StartX + f2Len * Math.cos(f2Rad);
-        const f2EndY = f2StartY + f2Len * Math.sin(f2Rad);
-
-        // Arrowhead: extends BEYOND the line end, not overlapping
         function arrowHead(ex, ey, angle, color) {
-            const hl = 18;
-            const hw = 0.35;
-            // Tip is ahead of line end
+            const hl = 18, hw = 0.35;
             const tipX = ex + 5 * Math.cos(angle);
             const tipY = ey + 5 * Math.sin(angle);
             const p1x = tipX - hl * Math.cos(angle - hw);
@@ -416,24 +405,101 @@
             return '<polygon points="'+tipX+','+tipY+' '+p1x+','+p1y+' '+p2x+','+p2y+'" fill="'+color+'"/>';
         }
 
-        const f1MidX = (f1StartX + f1EndX) / 2;
-        const f1MidY = (f1StartY + f1EndY) / 2 - 16;
-        const f2MidX = (f2StartX + f2EndX) / 2;
-        const f2MidY = (f2StartY + f2EndY) / 2 + 24;
+        let svgContent;
+
+        if (isDiffBody) {
+            // 两个独立物体，各自受一个力
+            const f1Len = f1Val * scale;
+            const f2Len = f2Val * scale;
+            // 左车 A，中心 (130, 90)；右车 B，中心 (370, 90)
+            const ax = 130, ay = 90, bx = 370, by = 90;
+            const bw = 46, bh = 28, wr = 10;
+
+            // F1 从车 A 边缘出发
+            const f1StartX = ax + bw * Math.cos(f1Rad);
+            const f1StartY = ay;
+            const f1EndX = f1StartX + f1Len * Math.cos(f1Rad);
+            const f1EndY = f1StartY + f1Len * Math.sin(f1Rad);
+            const f1LabelX = (f1StartX + f1EndX) / 2;
+            const f1LabelY = (f1StartY + f1EndY) / 2 - 14;
+
+            // F2 从车 B 边缘出发
+            const f2StartX = bx + bw * Math.cos(f2Rad);
+            const f2StartY = by;
+            const f2EndX = f2StartX + f2Len * Math.cos(f2Rad);
+            const f2EndY = f2StartY + f2Len * Math.sin(f2Rad);
+            const f2LabelX = (f2StartX + f2EndX) / 2;
+            const f2LabelY = (f2StartY + f2EndY) / 2 - 14;
+
+            const groundY = 128;
+
+            svgContent =
+                // 地面
+                '<rect x="0" y="'+groundY+'" width="500" height="72" fill="#8b7355"/>' +
+                '<line x1="0" y1="'+groundY+'" x2="500" y2="'+groundY+'" stroke="#5d4e37" stroke-width="2"/>' +
+                // 纹理
+                [0,20,40,60,80,100,120,140,160,180,200,220,240,260,280,300,320,340,360,380,400,420,440,460,480].map(i =>
+                    '<rect x="'+i+'" y="'+groundY+'" width="10" height="6" fill="rgba(0,0,0,0.12)"/>'
+                ).join('') +
+                // 车 A（蓝色）
+                '<rect x="'+(ax-bw)+'" y="'+(ay-bh/2)+'" width="'+(bw*2)+'" height="'+bh+'" rx="5" fill="#0071bc" stroke="#005894" stroke-width="2"/>' +
+                '<text x="'+ax+'" y="'+(ay+6)+'" text-anchor="middle" font-size="14" fill="white" font-weight="bold">A</text>' +
+                // 车 A 轮子
+                '<circle cx="'+(ax-bw+14)+'" cy="'+groundY+'" r="'+wr+'" fill="#404751" stroke="#191c1e" stroke-width="2"/>' +
+                '<circle cx="'+(ax+bw-14)+'" cy="'+groundY+'" r="'+wr+'" fill="#404751" stroke="#191c1e" stroke-width="2"/>' +
+                // 车 B（橙色）
+                '<rect x="'+(bx-bw)+'" y="'+(by-bh/2)+'" width="'+(bw*2)+'" height="'+bh+'" rx="5" fill="#e07800" stroke="#c06200" stroke-width="2"/>' +
+                '<text x="'+bx+'" y="'+(by+6)+'" text-anchor="middle" font-size="14" fill="white" font-weight="bold">B</text>' +
+                // 车 B 轮子
+                '<circle cx="'+(bx-bw+14)+'" cy="'+groundY+'" r="'+wr+'" fill="#404751" stroke="#191c1e" stroke-width="2"/>' +
+                '<circle cx="'+(bx+bw-14)+'" cy="'+groundY+'" r="'+wr+'" fill="#404751" stroke="#191c1e" stroke-width="2"/>' +
+                // F1 箭头（作用于 A）
+                '<line x1="'+f1StartX+'" y1="'+f1StartY+'" x2="'+f1EndX+'" y2="'+f1EndY+'" stroke="#005894" stroke-width="4"/>' +
+                arrowHead(f1EndX, f1EndY, f1Rad, '#005894') +
+                '<text x="'+f1LabelX+'" y="'+f1LabelY+'" text-anchor="middle" font-size="13" fill="#005894" font-weight="bold">F\u2081='+f1Val+'N</text>' +
+                // F2 箭头（作用于 B）
+                '<line x1="'+f2StartX+'" y1="'+f2StartY+'" x2="'+f2EndX+'" y2="'+f2EndY+'" stroke="#ad3300" stroke-width="4"/>' +
+                arrowHead(f2EndX, f2EndY, f2Rad, '#ad3300') +
+                '<text x="'+f2LabelX+'" y="'+f2LabelY+'" text-anchor="middle" font-size="13" fill="#ad3300" font-weight="bold">F\u2082='+f2Val+'N</text>' +
+                // 状态文字
+                '<text x="250" y="190" text-anchor="middle" font-size="15" fill="'+statusColor+'" font-weight="bold">'+statusIcon+' '+statusText+'</text>';
+        } else {
+            // 同一物体：原有逻辑
+            const f1Len = f1Val * scale;
+            const f2Len = f2Val * scale;
+            const cx = 250, cy = 95;
+            const bw = 50, bh = 22;
+
+            const f1StartX = cx + bw * Math.cos(f1Rad);
+            const f1StartY = cy + bh * Math.sin(f1Rad);
+            const f1EndX = f1StartX + f1Len * Math.cos(f1Rad);
+            const f1EndY = f1StartY + f1Len * Math.sin(f1Rad);
+
+            const f2StartX = cx + bw * Math.cos(f2Rad);
+            const f2StartY = cy + bh * Math.sin(f2Rad);
+            const f2EndX = f2StartX + f2Len * Math.cos(f2Rad);
+            const f2EndY = f2StartY + f2Len * Math.sin(f2Rad);
+
+            const f1LabelX = (f1StartX + f1EndX) / 2;
+            const f1LabelY = (f1StartY + f1EndY) / 2 - 16;
+            const f2LabelX = (f2StartX + f2EndX) / 2;
+            const f2LabelY = (f2StartY + f2EndY) / 2 + 24;
+
+            svgContent =
+                '<rect x="200" y="73" width="100" height="44" rx="6" fill="#0071bc" stroke="#005894" stroke-width="2.5"/>' +
+                '<text x="250" y="101" text-anchor="middle" font-size="18" fill="white" font-weight="bold">\u7269\u4f53</text>' +
+                '<line x1="'+f1StartX+'" y1="'+f1StartY+'" x2="'+f1EndX+'" y2="'+f1EndY+'" stroke="#ad3300" stroke-width="5"/>' +
+                arrowHead(f1EndX, f1EndY, f1Rad, '#ad3300') +
+                '<text x="'+f1LabelX+'" y="'+f1LabelY+'" text-anchor="middle" font-size="15" fill="#ad3300" font-weight="bold">'+f1Val+'N</text>' +
+                '<line x1="'+f2StartX+'" y1="'+f2StartY+'" x2="'+f2EndX+'" y2="'+f2EndY+'" stroke="#ad3300" stroke-width="5"/>' +
+                arrowHead(f2EndX, f2EndY, f2Rad, '#ad3300') +
+                '<text x="'+f2LabelX+'" y="'+f2LabelY+'" text-anchor="middle" font-size="15" fill="#ad3300" font-weight="bold">'+f2Val+'N</text>' +
+                '<text x="250" y="188" text-anchor="middle" font-size="20" fill="'+statusColor+'" font-weight="bold">'+statusIcon+' '+r.status+'</text>';
+        }
 
         return '<div class="bg-surface-container-low rounded-xl p-6 text-center">' +
             '<p class="font-bold text-on-surface mb-4" style="font-size:20px">\u8bb0\u5f55 '+(idx+1)+'</p>' +
-            '<svg viewBox="0 0 500 200" width="100%">' +
-            '<rect x="200" y="73" width="100" height="44" rx="6" fill="#0071bc" stroke="#005894" stroke-width="2.5"/>' +
-            '<text x="250" y="101" text-anchor="middle" font-size="18" fill="white" font-weight="bold">\u7269\u4f53</text>' +
-            '<line x1="'+f1StartX+'" y1="'+f1StartY+'" x2="'+f1EndX+'" y2="'+f1EndY+'" stroke="#ad3300" stroke-width="5"/>' +
-            arrowHead(f1EndX, f1EndY, f1Rad, '#ad3300') +
-            '<text x="'+f1MidX+'" y="'+f1MidY+'" text-anchor="middle" font-size="15" fill="#ad3300" font-weight="bold">'+f1Val+'N</text>' +
-            '<line x1="'+f2StartX+'" y1="'+f2StartY+'" x2="'+f2EndX+'" y2="'+f2EndY+'" stroke="#ad3300" stroke-width="5"/>' +
-            arrowHead(f2EndX, f2EndY, f2Rad, '#ad3300') +
-            '<text x="'+f2MidX+'" y="'+f2MidY+'" text-anchor="middle" font-size="15" fill="#ad3300" font-weight="bold">'+f2Val+'N</text>' +
-            '<text x="250" y="188" text-anchor="middle" font-size="20" fill="'+statusColor+'" font-weight="bold">'+statusIcon+' '+r.status+'</text>' +
-            '</svg></div>';
+            '<svg viewBox="0 0 500 200" width="100%">' + svgContent + '</svg></div>';
     }).join('');
 })();
 </script>

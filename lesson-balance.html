@@ -397,20 +397,27 @@
             const netFx = leftForce * Math.cos(f1Angle) + rightForce * Math.cos(f2Angle);
             const netFy = leftForce * Math.sin(f1Angle) + rightForce * Math.sin(f2Angle);
             const netFMag = Math.sqrt(netFx * netFx + netFy * netFy);
-            document.getElementById('netForce').textContent = `ΣF = ${netFMag.toFixed(2)} N`;
 
-            // Update state display
             const isCollinear = checkCollinear();
             const isSameBody = (currentMode === 'collinear') || (currentMode === 'sameBody' && sameBodySubMode === 'same');
+
+            // 不同物体时合力不做计算，显示 /
+            if (!isSameBody) {
+                document.getElementById('netForce').textContent = '/';
+            } else {
+                document.getElementById('netForce').textContent = `ΣF = ${netFMag.toFixed(2)} N`;
+            }
+
+            // Update state display — 不同物体直接标注；同一物体与共线探究逻辑一致
             const isBalanced = netFMag < 0.5 && isCollinear && isSameBody;
             const stateDisplay = document.getElementById('stateDisplay');
-            if (isBalanced) {
-                stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
-                stateDisplay.innerHTML = '<span class="text-tertiary">平衡状态 ✓</span>';
-            } else if (!isSameBody) {
+            if (!isSameBody) {
                 stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
                 stateDisplay.innerHTML = '<span class="text-error">非平衡 — 不同体</span>';
-            } else if ((!isCollinear) && netFMag < 0.5) {
+            } else if (isBalanced) {
+                stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
+                stateDisplay.innerHTML = '<span class="text-tertiary">平衡状态 ✓</span>';
+            } else if (!isCollinear && netFMag < 0.5) {
                 stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
                 stateDisplay.innerHTML = '<span class="text-error">不共线 — 物体会旋转</span>';
             } else {
@@ -992,10 +999,12 @@
             const netFMag = Math.sqrt(netFx * netFx + netFy * netFy);
             const isCollinear = checkCollinear();
             const isSameBody = (currentMode === 'collinear') || (currentMode === 'sameBody' && sameBodySubMode === 'same');
-            const isBalanced = netFMag < 0.5 && isCollinear && isSameBody;
+            // 不同物体不计算合力；同一物体与共线探究逻辑一致
+            const isBalanced = isSameBody && netFMag < 0.5 && isCollinear;
 
             let status = '不平衡';
-            if (isBalanced) status = '平衡';
+            if (!isSameBody) status = '—';
+            else if (isBalanced) status = '平衡';
 
             // Angle in degrees for display
             const f1Deg = Math.round(f1Angle * 180 / Math.PI);
@@ -1005,7 +1014,7 @@
                 num: records.length + 1,
                 left: leftForce.toFixed(1) + 'N ' + f1Deg + '°',
                 right: rightForce.toFixed(1) + 'N ' + f2Deg + '°',
-                net: netFMag.toFixed(2),
+                net: isSameBody ? netFMag.toFixed(2) : '/',
                 collinear: isCollinear ? '是' : '否',
                 sameBody: isSameBody ? '是' : '否',
                 status: status
@@ -1029,10 +1038,10 @@
                     <td class="py-3 px-3">${idx + 1}</td>
                     <td class="py-3 px-3">${r.left}</td>
                     <td class="py-3 px-3">${r.right}</td>
-                    <td class="py-3 px-3 text-data-mono font-data-mono">${r.net} N</td>
+                    <td class="py-3 px-3 text-data-mono font-data-mono">${r.net === '/' ? '/' : r.net + ' N'}</td>
                     <td class="py-3 px-3"><span class="${r.collinear === '是' ? 'text-tertiary' : 'text-error'}">${r.collinear}</span></td>
                     <td class="py-3 px-3"><span class="${r.sameBody === '是' ? 'text-tertiary' : 'text-error'}">${r.sameBody}</span></td>
-                    <td class="py-3 px-3"><span class="px-2 py-1 rounded-lg ${r.status === '平衡' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-error-container text-on-error-container'}">${r.status}</span></td>
+                    <td class="py-3 px-3"><span class="px-2 py-1 rounded-lg ${r.status === '平衡' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : r.status === '—' ? 'bg-surface-container text-on-surface-variant' : 'bg-error-container text-on-error-container'}">${r.status}</span></td>
                 </tr>
             `).join('');
         }
