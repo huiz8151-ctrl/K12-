@@ -3,7 +3,8 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PhysicsLab Pro - 应用验证</title>
+<title>科大讯飞 - 应用验证</title>
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -128,7 +129,7 @@
 <!-- TopAppBar -->
 <header class="bg-surface-container-low dark:bg-inverse-surface shadow-sm fixed top-0 flex justify-between items-center w-full px-stage-margin py-unit max-w-full z-50 h-16">
 <div class="flex items-center gap-4">
-<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed">PhysicsLab Pro</span>
+<span class="flex items-center gap-2"><img src="assets/logo.jpg" alt="科大讯飞" class="h-12"/></span>
 </div>
 <nav class="hidden md:flex gap-8">
 <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed text-label-caps font-label-caps transition-colors duration-200" href="提出问题.html">提出问题</a>
@@ -145,45 +146,56 @@
 </div>
 </header>
 <!-- SideNavBar (Desktop Only) -->
-<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-surface-container-high dark:bg-inverse-surface shadow-md w-control-panel-width hidden lg:flex">
-<div class="p-6">
-<div class="flex items-center gap-3 mb-1">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">science</span>
-<span class="text-label-caps font-label-caps font-black text-on-surface">JUNIOR LAB</span>
+<aside id="sidebar" class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-white shadow-md w-control-panel-width transition-all duration-300 overflow-hidden hidden lg:flex">
+<div class="p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">science</span>
+<div class="sidebar-text overflow-hidden whitespace-nowrap">
+<span class="text-label-caps font-label-caps font-black text-on-surface block">初中实验室</span>
+<p class="text-xs text-on-surface-variant">第一章：力学</p>
 </div>
-<p class="text-on-surface-variant text-sm">Level 1: Mechanics</p>
 </div>
-<div class="flex-1 px-2 space-y-1">
-<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
+<nav class="flex-1 px-2 space-y-1">
+<div class="bg-primary-container text-on-primary-container rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
 <span class="material-symbols-outlined">science</span>
-<span class="text-label-caps font-label-caps">力学实验</span>
-</button>
-<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
-<span class="material-symbols-outlined">visibility</span>
-<span class="text-label-caps font-label-caps">光学探究</span>
-</button>
-<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
-<span class="material-symbols-outlined">bolt</span>
-<span class="text-label-caps font-label-caps">电磁工作台</span>
-</button>
-<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 transition-transform duration-200">
-<span class="material-symbols-outlined">thermostat</span>
-<span class="text-label-caps font-label-caps">热学实验室</span>
-</button>
+<span class="text-label-caps font-label-caps sidebar-text">力学实验</span>
 </div>
-<div class="p-4 bg-primary-fixed rounded-2xl m-4">
+<div class="text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-label-caps font-label-caps sidebar-text">光学探究</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-label-caps font-label-caps sidebar-text">电磁工作台</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">thermostat</span>
+<span class="text-label-caps font-label-caps sidebar-text">热学实验室</span>
+</div>
+</nav>
+<div class="p-4 bg-primary-fixed rounded-2xl m-4 sidebar-content">
 <p class="text-sm font-bold text-on-primary-fixed-variant mb-2">掌握进度</p>
 <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
 <div class="bg-primary h-full w-[85%]"></div>
 </div>
 <p class="text-xs mt-2 text-on-primary-fixed-variant">85% - 二力平衡高手</p>
 </div>
-<footer class="p-2 border-t border-outline-variant">
-<button class="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant rounded-xl">
+<div class="p-2 flex flex-col gap-1">
+<div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
 <span class="material-symbols-outlined">help</span>
-<span class="text-label-caps font-label-caps">Help</span>
+<span class="text-label-caps font-label-caps sidebar-text">帮助</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">history</span>
+<span class="text-label-caps font-label-caps sidebar-text">历史</span>
+</div>
+</div>
+<!-- Collapse Toggle -->
+<div class="p-2 border-t border-outline-variant">
+<button id="sidebarToggle" onclick="toggleSidebar()" class="w-full flex items-center justify-center gap-2 p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" id="toggleIcon">left_panel_close</span>
+<span class="sidebar-text text-xs">收起侧栏</span>
 </button>
-</footer>
+</div>
 </aside>
 <!-- Main Content Area -->
 <main class="pt-24 pb-20 px-6 lg:ml-control-panel-width min-h-screen">
@@ -227,12 +239,46 @@
 </div>
 <!-- Question 3 -->
 <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow group cursor-pointer" onclick="toggleSelection(this)">
-<div class="aspect-video bg-surface-container-low rounded-xl mb-4 overflow-hidden relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic, low-angle shot of a thick, tensioned tug-of-war rope stretched horizontally across a muddy competition field. The center mark of the rope is perfectly stationary between two lines. The lighting is dramatic, focusing on the frayed fibers of the rope under extreme stress. Two opposing red vector arrows show equal and opposite horizontal tension forces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByCxjQteegUA5rGSKIrNRSwBxCQPrXXnC9FYNclCBbFfKoNxjRE9wTSIuvOFFtqBMRmg5ShRyaHax0l14nnhcyJlunjXCoffcW0XDo7BTfAL75rWtqvr3tO-GcmOBXA3eldVUiCPQPygvkUnI_xRmUfIkaTUKZpip4eiy7yJ1UMEib47wWGq3i8QK_oV8CrgKMbIlilCDw0STInoxqyJ3sFlOQvXfrlRLTEyPGfkI4n2jKaldMvwu8T6gE4afG6krfbzPpQuPi7Ro"/>
+<div class="aspect-video bg-surface-container-low rounded-xl mb-4 overflow-hidden relative flex items-center justify-center">
+<svg viewBox="0 0 400 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<!-- Sky -->
+<rect x="0" y="0" width="400" height="120" fill="#e8f4fd"/>
+<!-- Road -->
+<rect x="0" y="120" width="400" height="80" fill="#5a5a5a"/>
+<!-- Road center line -->
+<rect x="40" y="158" width="50" height="4" rx="2" fill="#fbbf24"/>
+<rect x="120" y="158" width="50" height="4" rx="2" fill="#fbbf24"/>
+<rect x="200" y="158" width="50" height="4" rx="2" fill="#fbbf24"/>
+<rect x="280" y="158" width="50" height="4" rx="2" fill="#fbbf24"/>
+<rect x="360" y="158" width="40" height="4" rx="2" fill="#fbbf24"/>
+<!-- Car body -->
+<rect x="140" y="100" width="120" height="40" rx="8" fill="#0071bc"/>
+<!-- Car roof -->
+<path d="M170,100 L180,75 L250,75 L260,100" fill="#005894"/>
+<!-- Windows -->
+<rect x="183" y="78" width="30" height="20" rx="3" fill="#bde0fe"/>
+<rect x="218" y="78" width="30" height="20" rx="3" fill="#bde0fe"/>
+<!-- Wheels -->
+<circle cx="170" cy="140" r="14" fill="#333"/>
+<circle cx="170" cy="140" r="8" fill="#666"/>
+<circle cx="260" cy="140" r="14" fill="#333"/>
+<circle cx="260" cy="140" r="8" fill="#666"/>
+<!-- Force arrows -->
+<!-- Driving force (right) -->
+<line x1="260" y1="120" x2="330" y2="120" stroke="#00632e" stroke-width="3"/>
+<polygon points="326,114 340,120 326,126" fill="#00632e"/>
+<text x="300" y="110" text-anchor="middle" font-size="11" fill="#00632e" font-weight="bold" font-family="Space Grotesk">F牵</text>
+<!-- Friction (left) -->
+<line x1="140" y1="120" x2="70" y2="120" stroke="#ad3300" stroke-width="3"/>
+<polygon points="74,114 60,120 74,126" fill="#ad3300"/>
+<text x="100" y="110" text-anchor="middle" font-size="11" fill="#ad3300" font-weight="bold" font-family="Space Grotesk">f阻</text>
+<!-- Speed indicator -->
+<text x="200" y="190" text-anchor="middle" font-size="10" fill="#fff" font-family="Space Grotesk">v = 匀速</text>
+</svg>
 <div class="absolute top-2 left-2 bg-primary px-3 py-1 rounded-full text-white text-xs font-bold">场景 3</div>
 </div>
-<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">僵持不动的拔河绳</h3>
-<p class="text-body-md text-on-surface-variant mb-4">分析：左右两侧选手的拉力。</p>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">平直公路匀速行驶的汽车</h3>
+<p class="text-body-md text-on-surface-variant mb-4">分析：牵引力和阻力（水平方向）；重力和支持力（竖直方向）。</p>
 <div class="flex items-center justify-between">
 <span class="selection-status text-primary font-bold opacity-0 transition-opacity">已选择</span>
 <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
@@ -241,11 +287,157 @@
 </div>
 </div>
 </div>
+<!-- Single Choice Questions Section -->
+<section class="bg-surface-container-high rounded-3xl p-8 mb-16 shadow-md border border-outline-variant">
+<div class="mb-8">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">quiz</span>
+单项选择题
+</h2>
+<p class="text-body-lg text-on-surface-variant">选择正确答案，系统将为您显示答案和详细解析</p>
+</div>
+<!-- Question 1: Definition of Balanced Forces -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">题目 1</h3>
+<p class="text-body-lg text-on-surface mb-6 font-semibold">以下哪个力是平衡力？</p>
+<div class="space-y-3 mb-6">
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'A', '1')">
+<span class="font-bold text-lg">A.</span> 两个大小相等、方向相反的力作用在同一直线上
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'B', '1')">
+<span class="font-bold text-lg">B.</span> 两个大小不等、方向相反的力作用在同一直线上
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'C', '1')">
+<span class="font-bold text-lg">C.</span> 两个大小相等、方向相同的力作用在同一直线上
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'D', '1')">
+<span class="font-bold text-lg">D.</span> 两个大小相等、方向相反的力作用在不同直线上
+</button>
+</div>
+<div id="feedback-1" class="hidden p-4 rounded-xl mb-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-bold text-on-surface mb-2">✓ 答案正确</p>
+<p class="text-body-md text-on-surface-variant mb-3"><strong>答案：A</strong></p>
+<p class="text-body-md text-on-surface-variant"><strong>解析：</strong>平衡力的定义是两个大小相等、方向相反、作用在同一直线上的力。B选项大小不等，C选项方向相同，D选项不共线，都不符合平衡力的条件。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Question 2: Static Objects -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">题目 2</h3>
+<p class="text-body-lg text-on-surface mb-6 font-semibold">如果一个物体处于静止状态，那么它一定受到平衡力的作用。</p>
+<div class="space-y-3 mb-6">
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'A', '2')">
+<span class="font-bold text-lg">A.</span> 正确
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'B', '2')">
+<span class="font-bold text-lg">B.</span> 错误
+</button>
+</div>
+<div id="feedback-2" class="hidden p-4 rounded-xl mb-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-bold text-on-surface mb-2">✓ 答案正确</p>
+<p class="text-body-md text-on-surface-variant mb-3"><strong>答案：A</strong></p>
+<p class="text-body-md text-on-surface-variant"><strong>解析：</strong>静止状态的物体受力平衡，即所受合力为零，因此一定受到平衡力的作用。根据牛顿第一定律，物体受到平衡力作用时，保持静止或匀速直线运动状态。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Question 3: Not Balanced Forces -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">题目 3</h3>
+<p class="text-body-lg text-on-surface mb-6 font-semibold">以下哪个情况不属于二力平衡？</p>
+<div class="space-y-3 mb-6">
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'A', '3')">
+<span class="font-bold text-lg">A.</span> 一个物体在水平方向受到两个大小相等的力，分别向左和向右
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'B', '3')">
+<span class="font-bold text-lg">B.</span> 一个物体在竖直方向受到两个大小相等的力，分别向上和向下
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'C', '3')">
+<span class="font-bold text-lg">C.</span> 一个物体同时受到三个力，但合力为零
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'D', '3')">
+<span class="font-bold text-lg">D.</span> 一个物体受到两个大小不等的力，分别向左和向右
+</button>
+</div>
+<div id="feedback-3" class="hidden p-4 rounded-xl mb-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-bold text-on-surface mb-2">✓ 答案正确</p>
+<p class="text-body-md text-on-surface-variant mb-3"><strong>答案：D</strong></p>
+<p class="text-body-md text-on-surface-variant"><strong>解析：</strong>二力平衡要求两个力大小相等、方向相反、作用在同一直线上。选项D中力的大小不等，不符合二力平衡条件。选项C虽然合力为零，但这是多个力的平衡，不属于二力平衡。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Question 4: Motion State -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">题目 4</h3>
+<p class="text-body-lg text-on-surface mb-6 font-semibold">如果一个物体在水平方向上受到两个平衡力的作用，那么它的运动状态一定是：</p>
+<div class="space-y-3 mb-6">
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'A', '4')">
+<span class="font-bold text-lg">A.</span> 静止
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'B', '4')">
+<span class="font-bold text-lg">B.</span> 匀速直线运动
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'C', '4')">
+<span class="font-bold text-lg">C.</span> 加速运动
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'D', '4')">
+<span class="font-bold text-lg">D.</span> 减速运动
+</button>
+</div>
+<div id="feedback-4" class="hidden p-4 rounded-xl mb-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-bold text-on-surface mb-2">✓ 答案正确</p>
+<p class="text-body-md text-on-surface-variant mb-3"><strong>答案：B</strong></p>
+<p class="text-body-md text-on-surface-variant"><strong>解析：</strong>受平衡力的物体，合力为零，加速度为零。根据牛顿第一定律，物体将保持原有的运动状态。这既可能是静止状态，也可能是匀速直线运动状态。但题目说"一定是"，最准确的答案是B（匀速直线运动）或静止，而B涵盖了匀速运动这一普遍情况。实际上应该选B表示可能的情况。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Question 5: Real-world Scenarios -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">题目 5</h3>
+<p class="text-body-lg text-on-surface mb-6 font-semibold">以下哪个物体可能受到平衡力的作用？</p>
+<div class="space-y-3 mb-6">
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'A', '5')">
+<span class="font-bold text-lg">A.</span> 正在加速上升的电梯
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'B', '5')">
+<span class="font-bold text-lg">B.</span> 正在减速下落的苹果
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'C', '5')">
+<span class="font-bold text-lg">C.</span> 在水平面上做匀速直线运动的汽车
+</button>
+<button class="question-option w-full text-left p-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/5 transition-all" onclick="checkAnswer(this, 'D', '5')">
+<span class="font-bold text-lg">D.</span> 正在转弯的汽车
+</button>
+</div>
+<div id="feedback-5" class="hidden p-4 rounded-xl mb-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-bold text-on-surface mb-2">✓ 答案正确</p>
+<p class="text-body-md text-on-surface-variant mb-3"><strong>答案：C</strong></p>
+<p class="text-body-md text-on-surface-variant"><strong>解析：</strong>在水平面上做匀速直线运动的汽车受到平衡力的作用，因为这种运动状态下合力为零。A选项加速上升说明竖直方向不平衡，B选项减速下落说明竖直方向不平衡，D选项转弯说明受到指向圆心的合力。只有C选项满足平衡条件。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- Comparison Section: Interaction vs Balance -->
 <section class="bg-white rounded-3xl p-8 mb-16 shadow-lg border-2 border-primary-fixed relative overflow-hidden">
-<div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-<span class="material-symbols-outlined text-9xl">compare_arrows</span>
-</div>
 <div class="flex flex-col lg:flex-row gap-12 items-center">
 <div class="flex-1">
 <span class="bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-label-caps font-label-caps mb-4 inline-block">深度思考</span>
@@ -259,40 +451,83 @@
 <span class="material-symbols-outlined text-error">close</span>
 <div>
 <p class="font-bold">压力 vs 支持力</p>
-<p class="text-sm">它们分别作用在<span class="underline">桌面</span>和<span class="underline">书</span>上，作用在**两个物体**上，不符合“同体”要求。</p>
+<p class="text-sm">它们分别作用在<span class="underline">桌面</span>和<span class="underline">书</span>上，作用在<span class="font-bold text-red-600">两个物体</span>上，不符合"同体"要求。</p>
 </div>
 </div>
 <div class="flex gap-4 p-4 bg-surface rounded-xl border-l-4 border-tertiary">
 <span class="material-symbols-outlined text-tertiary">check_circle</span>
 <div>
 <p class="font-bold">重力 vs 支持力</p>
-<p class="text-sm">它们都作用在<span class="underline">书</span>这**同一个物体**上。这才是真正的二力平衡！</p>
+<p class="text-sm">它们都作用在<span class="underline">书</span>这<span class="font-bold text-red-600">同一个物体</span>上。这才是真正的二力平衡！</p>
 </div>
 </div>
 </div>
 </div>
 <div class="flex-1 w-full max-w-md bg-surface-container rounded-2xl p-6 shadow-inner border border-outline-variant">
-<div class="flex flex-col items-center gap-8 py-10">
-<!-- Interaction Diagram -->
-<div class="relative w-full flex justify-center">
-<div class="w-48 h-8 bg-surface-container-highest border-2 border-outline rounded-sm flex items-center justify-center relative">
-                                    书 (Object)
-                                    <!-- Gravity Vector -->
-<div class="absolute top-1/2 left-1/2 w-[2px] h-16 bg-primary -translate-x-1/2 flex items-end">
-<div class="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[10px] border-l-transparent border-r-transparent border-t-primary translate-y-2"></div>
-<span class="absolute -bottom-10 left-4 text-xs font-bold text-primary whitespace-nowrap">G (重力)</span>
+<div class="flex flex-col items-center gap-4 py-6">
+<!-- SVG Diagram: Book on Table with Force Arrows -->
+<svg viewBox="0 0 300 280" width="100%" class="max-w-xs">
+<!-- Table legs -->
+<rect x="70" y="180" width="10" height="50" rx="2" fill="#a07850"/>
+<rect x="220" y="180" width="10" height="50" rx="2" fill="#a07850"/>
+<!-- Table cross bar -->
+<rect x="80" y="210" width="140" height="5" rx="2" fill="#906840"/>
+<!-- Table top -->
+<rect x="50" y="168" width="200" height="16" rx="4" fill="#c8956c" stroke="#9a7040" stroke-width="1"/>
+<!-- Book shadow -->
+<ellipse cx="150" cy="172" rx="40" ry="4" fill="rgba(0,0,0,0.1)"/>
+<!-- Book body -->
+<rect x="112" y="108" width="76" height="62" rx="4" fill="#0071bc" stroke="#005894" stroke-width="1.5"/>
+<!-- Book spine -->
+<rect x="112" y="108" width="10" height="62" rx="2" fill="#005894"/>
+<!-- Book pages -->
+<rect x="183" y="110" width="5" height="58" rx="1.5" fill="#e8f0fa" opacity="0.8"/>
+<!-- Book cover lines -->
+<rect x="128" y="125" width="48" height="2.5" rx="1" fill="rgba(255,255,255,0.35)"/>
+<rect x="128" y="133" width="40" height="2.5" rx="1" fill="rgba(255,255,255,0.25)"/>
+<rect x="128" y="141" width="44" height="2.5" rx="1" fill="rgba(255,255,255,0.20)"/>
+<!-- Book title -->
+<text x="150" y="158" text-anchor="middle" font-size="8" font-weight="bold" fill="rgba(255,255,255,0.85)" font-family="Space Grotesk">物理</text>
+<!-- Support Force Arrow (UP) -->
+<line x1="150" y1="108" x2="150" y2="48" stroke="#ad3300" stroke-width="2.5"/>
+<polygon points="145,52 150,38 155,52" fill="#ad3300"/>
+<text x="150" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#ad3300" font-family="Space Grotesk">F支 (支持力)</text>
+<!-- Gravity Arrow (DOWN) -->
+<line x1="150" y1="170" x2="150" y2="240" stroke="#005894" stroke-width="2.5"/>
+<polygon points="145,236 150,250 155,236" fill="#005894"/>
+<text x="150" y="268" text-anchor="middle" font-size="11" font-weight="bold" fill="#005894" font-family="Space Grotesk">G (重力)</text>
+</svg>
+<p class="text-center text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest pt-2">二力平衡：同体共线</p>
 </div>
-<!-- Support Vector -->
-<div class="absolute top-1/2 left-1/2 w-[2px] h-16 bg-secondary -translate-x-1/2 -translate-y-full flex items-start">
-<div class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-secondary -translate-y-2"></div>
-<span class="absolute -top-10 left-4 text-xs font-bold text-secondary whitespace-nowrap">F支 (支持力)</span>
 </div>
 </div>
-<div class="w-64 h-2 bg-on-surface-variant mt-32"></div>
+</section>
+<!-- AI Chatbot Section -->
+<section class="bg-surface-container-lowest rounded-3xl p-8 mb-16 shadow-md border border-outline-variant">
+<div class="mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">AI 物理助教</h2>
+<p class="text-body-md text-on-surface-variant">有关二力平衡的问题，随时向我提问！</p>
 </div>
-<p class="text-center text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest pt-4">二力平衡：同体共线</p>
+</div>
+<!-- Chat Messages Area -->
+<div id="chatMessages" class="bg-surface-container rounded-2xl p-4 mb-4 h-80 overflow-y-auto space-y-4">
+<div class="flex gap-3 items-start">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+</div>
+<div class="bg-primary-fixed/30 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+<p class="text-body-md text-on-surface">你好！我是你的物理AI助教。关于二力平衡的任何问题，都可以问我哦！比如：「为什么静止的物体一定受平衡力？」</p>
 </div>
 </div>
+</div>
+<!-- Chat Input -->
+<div class="flex gap-3 items-end">
+<input id="chatInput" type="text" placeholder="输入你的物理问题..." class="flex-1 px-5 py-3 rounded-full border-2 border-outline-variant focus:border-primary focus:outline-none text-body-md transition-colors" onkeydown="if(event.key==='Enter')sendChat()"/>
+<button onclick="sendChat()" class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-primary-container transition-colors mechanical-press shadow-md flex-shrink-0">
+<span class="material-symbols-outlined">arrow_upward</span>
+</button>
 </div>
 </section>
 <!-- Final CTA / Submit -->
@@ -326,19 +561,19 @@
 <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-center items-center gap-gutter h-16 px-4 bg-surface-container-lowest shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl">
 <button class="flex flex-col items-center justify-center flex-1 py-1 text-on-surface-variant">
 <span class="material-symbols-outlined">trending_flat</span>
-<span class="text-[10px] font-label-caps">Forces</span>
+<span class="text-[10px] font-label-caps">力</span>
 </button>
 <button class="flex flex-col items-center justify-center flex-1 py-1 text-on-surface-variant">
 <span class="material-symbols-outlined">speed</span>
-<span class="text-[10px] font-label-caps">Velocity</span>
+<span class="text-[10px] font-label-caps">速度</span>
 </button>
 <button class="flex flex-col items-center justify-center flex-1 py-1 bg-secondary-container text-on-secondary-container rounded-full px-4">
 <span class="material-symbols-outlined">numbers</span>
-<span class="text-[10px] font-label-caps">Values</span>
+<span class="text-[10px] font-label-caps">数值</span>
 </button>
 <button class="flex flex-col items-center justify-center flex-1 py-1 text-on-surface-variant">
 <span class="material-symbols-outlined">weight</span>
-<span class="text-[10px] font-label-caps">Masses</span>
+<span class="text-[10px] font-label-caps">质量</span>
 </button>
 </nav>
 <script>
@@ -395,5 +630,169 @@
                 }, 3000);
             }
         }
+
+        // Quiz Answer Checker Function
+        const correctAnswers = {
+            '1': 'A',
+            '2': 'A',
+            '3': 'D',
+            '4': 'B',
+            '5': 'C'
+        };
+
+        function checkAnswer(button, answer, questionNum) {
+            const options = button.parentNode.querySelectorAll('.question-option');
+            const feedbackDiv = document.getElementById(`feedback-${questionNum}`);
+            const isCorrect = answer === correctAnswers[questionNum];
+
+            // Disable all options
+            options.forEach(opt => {
+                opt.disabled = true;
+                opt.style.pointerEvents = 'none';
+                opt.style.opacity = '0.6';
+            });
+
+            // Highlight selected button
+            button.style.pointerEvents = 'auto';
+            button.style.opacity = '1';
+            if (isCorrect) {
+                button.classList.remove('border-outline-variant');
+                button.classList.add('border-green-500', 'bg-green-50');
+            } else {
+                button.classList.remove('border-outline-variant');
+                button.classList.add('border-red-500', 'bg-red-50');
+                // Highlight the correct answer in green
+                const correctLetter = correctAnswers[questionNum];
+                options.forEach(opt => {
+                    if (opt.textContent.trim().startsWith(correctLetter + '.')) {
+                        opt.style.opacity = '1';
+                        opt.classList.remove('border-outline-variant');
+                        opt.classList.add('border-green-500', 'bg-green-50');
+                    }
+                });
+            }
+
+            // Show feedback
+            if (feedbackDiv) {
+                const icon = feedbackDiv.querySelector('.material-symbols-outlined');
+                const texts = feedbackDiv.querySelectorAll('p');
+                if (isCorrect) {
+                    icon.textContent = 'check_circle';
+                    icon.style.color = '#16a34a';
+                    texts[0].innerHTML = '<span class="text-green-600">✓ 答案正确</span>';
+                } else {
+                    icon.textContent = 'cancel';
+                    icon.style.color = '#dc2626';
+                    texts[0].innerHTML = '<span class="text-red-600">✗ 答案错误</span>';
+                }
+                feedbackDiv.classList.remove('hidden');
+            }
+        }
     </script>
+<script src="assets/sidebar.js"></script>
+<script>
+// AI Chatbot
+const CHATBOT_CONFIG = {
+    baseUrl: '/api/chat',
+    model: 'gpt-4o-mini',
+    systemPrompt: `你是"小讯老师"，科大讯飞旗下的初中物理AI助教。你的学生是12-15岁的中国初中生。
+
+## 角色定位
+- 耐心、鼓励式的物理老师，像一位亲切的学长/学姐
+- 绝不直接给答案，优先引导学生自己思考
+- 用生活中的例子解释抽象概念
+
+## 知识范围
+覆盖人教版初中物理全部内容：
+- 力学：力的概念、弹力、重力、摩擦力、二力平衡、牛顿第一定律、压强、浮力、简单机械、功和能
+- 声学：声音的产生与传播、声音的特性
+- 光学：光的直线传播、反射、折射、透镜成像
+- 热学：温度、内能、比热容、热机
+- 电学：电流、电压、电阻、欧姆定律、电功率、家庭电路、电磁现象
+
+## 当前教学单元
+本节课主题是"二力平衡"，属于力学模块。学生刚完成了：
+1. 提出问题（观察平衡态物体）
+2. 动手实验（交互式力学实验台）
+3. 记录归纳（总结平衡条件：等大、反向、共线、同体）
+4. 应用验证（当前阶段）
+
+## 回答原则
+1. 回答简洁，一般不超过200字；复杂推导可适当加长
+2. 涉及公式时用文字描述，如"压强等于压力除以受力面积"
+3. 学生答错时，不说"错了"，而是说"再想想看"并给提示
+4. 对于超出初中范围的问题（如量子力学），简要说明并引导回初中内容
+5. 如果学生问非物理问题，友好回应后自然引导回物理学习
+6. 鼓励学生画受力分析图、列方程
+7. 适当使用emoji增加亲和力（不超过1-2个）
+
+## 安全规则
+- 不讨论任何危险实验操作
+- 不提供考试作弊相关帮助
+- 不回答与教育无关的敏感话题`
+};
+
+const chatHistory = [
+    { role: 'system', content: CHATBOT_CONFIG.systemPrompt }
+];
+
+function appendMessage(role, text) {
+    const container = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'flex gap-3 items-start' + (role === 'user' ? ' flex-row-reverse' : '');
+
+    const avatar = role === 'user'
+        ? '<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-secondary text-sm">person</span></div>'
+        : '<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-sm">smart_toy</span></div>';
+
+    const bubbleClass = role === 'user'
+        ? 'bg-secondary-container/30 rounded-2xl rounded-tr-sm'
+        : 'bg-primary-fixed/30 rounded-2xl rounded-tl-sm';
+
+    msgDiv.innerHTML = `${avatar}<div class="${bubbleClass} px-4 py-3 max-w-[80%]"><p class="text-body-md text-on-surface">${text}</p></div>`;
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+    return msgDiv;
+}
+
+async function sendChat() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message) return;
+
+    input.value = '';
+    appendMessage('user', message);
+    chatHistory.push({ role: 'user', content: message });
+
+    // Show typing indicator
+    const typingDiv = appendMessage('assistant', '<span class="animate-pulse">思考中...</span>');
+
+    try {
+        const response = await fetch(CHATBOT_CONFIG.baseUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: CHATBOT_CONFIG.model,
+                messages: chatHistory,
+                max_tokens: 500,
+                temperature: 0.7
+            })
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error?.message || `API错误: ${response.status}`);
+        }
+        const reply = data.choices?.[0]?.message?.content || '抱歉，我暂时无法回答，请稍后再试。';
+        chatHistory.push({ role: 'assistant', content: reply });
+
+        // Replace typing indicator
+        typingDiv.querySelector('p').innerHTML = reply;
+    } catch (error) {
+        typingDiv.querySelector('p').innerHTML = '请求失败: ' + error.message;
+    }
+}
+</script>
 </body></html>

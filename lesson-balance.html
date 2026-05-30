@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhysicsLab Pro - 动手实验</title>
+    <title>科大讯飞 - 动手实验</title>
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -110,11 +111,11 @@
         }
     </script>
 </head>
-<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col overflow-hidden">
+<body class="bg-background text-on-surface font-body-md h-screen min-h-screen flex flex-col overflow-hidden">
     <!-- TopAppBar -->
     <header class="bg-surface-bright dark:bg-surface-dim shadow-sm z-50 flex justify-between items-center w-full px-stage-margin py-unit">
         <div class="flex items-center gap-4">
-            <span class="text-headline-sm font-headline-sm font-bold text-primary">PhysicsLab Pro</span>
+            <span class="flex items-center gap-2"><img src="assets/logo.jpg" alt="科大讯飞" class="h-12"/></span>
         </div>
         <nav class="hidden md:flex gap-8">
             <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="提出问题.html">提出问题</a>
@@ -130,23 +131,54 @@
 
     <div class="flex-1 flex overflow-hidden">
         <!-- SideNavBar -->
-        <aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-surface-container-highest w-control-panel-width shadow-md">
-            <div class="p-6">
-                <div class="flex items-center gap-3 mb-1">
-                    <span class="material-symbols-outlined text-primary text-3xl">science</span>
-                    <span class="text-label-caps font-label-caps font-black">Junior Lab</span>
+        <aside id="sidebar" class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-white w-control-panel-width shadow-md transition-all duration-300 overflow-hidden">
+            <div class="p-4 flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">science</span>
+                <div class="sidebar-text overflow-hidden whitespace-nowrap">
+                    <span class="text-label-caps font-label-caps font-black text-on-surface block">初中实验室</span>
+                    <p class="text-xs text-on-surface-variant">第一章：力学</p>
                 </div>
-                <p class="text-xs text-on-surface-variant">Level 1: Mechanics</p>
             </div>
             <nav class="flex-1 px-2 space-y-1">
                 <div class="bg-primary-container text-on-primary-container rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
                     <span class="material-symbols-outlined">science</span>
-                    <span class="text-label-caps font-label-caps">力学实验</span>
+                    <span class="text-label-caps font-label-caps sidebar-text">力学实验</span>
+                </div>
+                <div class="text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+                    <span class="material-symbols-outlined">visibility</span>
+                    <span class="text-label-caps font-label-caps sidebar-text">光学探究</span>
+                </div>
+                <div class="text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+                    <span class="material-symbols-outlined">bolt</span>
+                    <span class="text-label-caps font-label-caps sidebar-text">电磁工作台</span>
+                </div>
+                <div class="text-on-surface-variant hover:bg-surface-container-low rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+                    <span class="material-symbols-outlined">thermostat</span>
+                    <span class="text-label-caps font-label-caps sidebar-text">热学实验室</span>
                 </div>
             </nav>
-            <div class="p-4 border-t border-outline-variant/30">
-                <button class="w-full bg-secondary py-3 px-4 rounded-xl text-on-secondary font-bold shadow-tactile hover:brightness-110">
-                    Start Experiment
+            <div class="p-4 bg-primary-fixed rounded-2xl m-4 sidebar-content">
+                <p class="text-sm font-bold text-on-primary-fixed-variant mb-2">掌握进度</p>
+                <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                    <div class="bg-primary h-full w-[50%]"></div>
+                </div>
+                <p class="text-xs mt-2 text-on-primary-fixed-variant">50% - 动手实验中</p>
+            </div>
+            <div class="p-2 flex flex-col gap-1">
+                <div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+                    <span class="material-symbols-outlined">help</span>
+                    <span class="text-label-caps font-label-caps sidebar-text">帮助</span>
+                </div>
+                <div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+                    <span class="material-symbols-outlined">history</span>
+                    <span class="text-label-caps font-label-caps sidebar-text">历史</span>
+                </div>
+            </div>
+            <!-- Collapse Toggle -->
+            <div class="p-2 border-t border-outline-variant">
+                <button id="sidebarToggle" onclick="toggleSidebar()" class="w-full flex items-center justify-center gap-2 p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                    <span class="material-symbols-outlined" id="toggleIcon">left_panel_close</span>
+                    <span class="sidebar-text text-xs">收起侧栏</span>
                 </button>
             </div>
         </aside>
@@ -163,11 +195,73 @@
             </nav>
 
             <!-- Main Content Grid -->
-            <div class="grid grid-cols-12 gap-gutter flex-1">
+            <div class="grid grid-cols-12 gap-gutter">
                 <!-- Canvas Area -->
                 <div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
-                    <div class="bg-white rounded-3xl shadow-tactile flex-1 relative stage-grid overflow-hidden border border-surface-container-highest">
+                    <!-- Mode Tabs -->
+                    <div class="flex gap-2 bg-surface-container rounded-xl p-1">
+                        <button id="tabCollinear" onclick="switchMode('collinear')" class="flex-1 py-2 px-4 rounded-lg text-label-caps font-label-caps font-bold bg-primary text-on-primary transition-all">共线探究</button>
+                        <button id="tabSameBody" onclick="switchMode('sameBody')" class="flex-1 py-2 px-4 rounded-lg text-label-caps font-label-caps font-bold text-on-surface-variant hover:bg-surface-container-low transition-all">同体探究</button>
+                    </div>
+
+                    <!-- Collinear Canvas -->
+                    <div id="collinearSection" class="bg-white rounded-3xl shadow-tactile h-96 relative stage-grid overflow-hidden border border-surface-container-highest">
                         <canvas id="forceCanvas" class="w-full h-full" style="display: block;"></canvas>
+                    </div>
+
+                    <!-- Same Body Canvas (hidden by default) -->
+                    <div id="sameBodySection" class="bg-white rounded-3xl shadow-tactile h-96 relative stage-grid overflow-hidden border border-surface-container-highest hidden">
+                        <!-- Toggle for same/different body -->
+                        <div class="absolute top-3 left-3 z-10 flex gap-2 bg-surface-container/90 rounded-lg p-1 backdrop-blur-sm">
+                            <button id="btnSameBody" onclick="setSameBodyMode('same')" class="px-3 py-1.5 rounded-md text-xs font-bold bg-primary text-on-primary transition-all">同一物体</button>
+                            <button id="btnDiffBody" onclick="setSameBodyMode('diff')" class="px-3 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:bg-surface-container-low transition-all">不同物体</button>
+                        </div>
+                        <canvas id="sameBodyCanvas" class="w-full h-full" style="display: block;"></canvas>
+                    </div>
+
+                    <!-- 思考问题 -->
+                    <div id="hintCollinear" class="bg-tertiary-container/10 rounded-2xl p-5 border-l-4 border-tertiary">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-tertiary mt-0.5">help</span>
+                            <div>
+                                <p class="font-bold text-on-surface mb-1">思考一下</p>
+                                <p class="text-body-md text-on-surface-variant">试着上下拖动力的作用点（箭头起点的圆点），让两个力不在同一条线上。即使大小相等、方向相反，物体会怎样？</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hintSameBody" class="bg-tertiary-container/10 rounded-2xl p-5 border-l-4 border-tertiary hidden">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-tertiary mt-0.5">help</span>
+                            <div>
+                                <p class="font-bold text-on-surface mb-1">思考一下</p>
+                                <p class="text-body-md text-on-surface-variant">两辆小车各受一个力，大小相等、方向相反、共线——但它们是"平衡"的吗？为什么？</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Record List -->
+                    <div class="bg-white rounded-3xl shadow-tactile p-6 border border-surface-container-highest">
+                        <h3 class="text-headline-md font-headline-md mb-4">实验记录</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-body-md">
+                                <thead class="border-b border-outline-variant">
+                                    <tr class="text-on-surface-variant text-label-caps font-label-caps">
+                                        <th class="text-left py-3 px-3">序号</th>
+                                        <th class="text-left py-3 px-3">F1</th>
+                                        <th class="text-left py-3 px-3">F2</th>
+                                        <th class="text-left py-3 px-3">合力</th>
+                                        <th class="text-left py-3 px-3">共线</th>
+                                        <th class="text-left py-3 px-3">同体</th>
+                                        <th class="text-left py-3 px-3">状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recordList">
+                                    <tr class="text-on-surface-variant text-center">
+                                        <td colspan="7" class="py-6">暂无记录</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -183,29 +277,23 @@
 
                     <!-- Force Controls -->
                     <div class="bg-white rounded-3xl shadow-tactile p-6 border border-surface-container-highest">
-                        <p class="text-label-caps font-label-caps text-on-surface-variant mb-4">左侧力量</p>
+                        <p class="text-label-caps font-label-caps text-on-surface-variant mb-4">F1</p>
                         <div class="space-y-3">
                             <input type="range" id="leftForce" min="0" max="12" value="5" class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer">
                             <div class="flex justify-between items-center">
                                 <span class="text-body-md" id="leftForceValue">5.0 N</span>
-                                <select id="leftDirection" class="px-3 py-1 border border-outline rounded-lg text-body-md">
-                                    <option value="right">向右</option>
-                                    <option value="left">向左</option>
-                                </select>
+                                <span class="text-xs text-on-surface-variant">拖动箭头旋转方向</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-tactile p-6 border border-surface-container-highest">
-                        <p class="text-label-caps font-label-caps text-on-surface-variant mb-4">右侧力量</p>
+                        <p class="text-label-caps font-label-caps text-on-surface-variant mb-4">F2</p>
                         <div class="space-y-3">
                             <input type="range" id="rightForce" min="0" max="12" value="5" class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer">
                             <div class="flex justify-between items-center">
                                 <span class="text-body-md" id="rightForceValue">5.0 N</span>
-                                <select id="rightDirection" class="px-3 py-1 border border-outline rounded-lg text-body-md">
-                                    <option value="right">向右</option>
-                                    <option value="left">向左</option>
-                                </select>
+                                <span class="text-xs text-on-surface-variant">拖动箭头旋转方向</span>
                             </div>
                         </div>
                     </div>
@@ -222,29 +310,9 @@
                     <button id="recordBtn" class="w-full bg-secondary text-on-secondary py-3 px-4 rounded-xl font-bold shadow-tactile hover:brightness-110 active:scale-95">
                         <span class="material-symbols-outlined inline mr-2">done</span>记录
                     </button>
-                </div>
-            </div>
-
-            <!-- Record List -->
-            <div class="bg-white rounded-3xl shadow-tactile p-6 border border-surface-container-highest">
-                <h3 class="text-headline-md font-headline-md mb-4">实验记录</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-body-md">
-                        <thead class="border-b border-outline-variant">
-                            <tr class="text-on-surface-variant text-label-caps font-label-caps">
-                                <th class="text-left py-3 px-3">序号</th>
-                                <th class="text-left py-3 px-3">左力</th>
-                                <th class="text-left py-3 px-3">右力</th>
-                                <th class="text-left py-3 px-3">合力</th>
-                                <th class="text-left py-3 px-3">状态</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recordList">
-                            <tr class="text-on-surface-variant text-center">
-                                <td colspan="5" class="py-6">暂无记录</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <button onclick="f1YOffset=0;f2YOffset=0;f1Angle=Math.PI;f2Angle=0;updateDisplay();" class="w-full bg-surface-container text-on-surface-variant py-3 px-4 rounded-xl font-bold hover:bg-surface-container-high active:scale-95 transition-all">
+                        <span class="material-symbols-outlined inline mr-2">straighten</span>重置共线
+                    </button>
                 </div>
             </div>
 
@@ -266,7 +334,37 @@
         // Canvas Setup
         const canvas = document.getElementById('forceCanvas');
         const ctx = canvas.getContext('2d');
-        let records = [];
+        let records = JSON.parse(localStorage.getItem('balanceRecords') || '[]');
+        let isHoveringCart = false;
+        let currentCartX = 0;
+        let currentCartBounds = {};
+        let currentMode = 'collinear';
+        let sameBodySubMode = 'same'; // 'same' or 'diff'
+
+        // Draggable force angles (in radians, 0 = right, PI = left)
+        // F1 default: points left (PI), F2 default: points right (0)
+        let f1Angle = Math.PI;
+        let f2Angle = 0;
+        let f1YOffset = 0;
+        let f2YOffset = 0;
+        let dragging = null; // 'f1angle', 'f2angle' or null
+        let dragStartY = 0;
+        let dragStartX = 0;
+        let dragStartOffset = 0;
+        let dragStartAngle = 0;
+        const maxYOffset = 60;
+        const maxAngle = Math.PI / 4; // not used for full rotation now
+
+        // Check if two forces are collinear (on the same line, 360° aware)
+        // Two arrows from center are collinear if their angles differ by PI and Y offsets are both ~0
+        function checkCollinear() {
+            // Normalize angle difference to [0, 2PI)
+            let angleDiff = ((f1Angle - f2Angle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+            // Distance from PI (collinear = opposite directions = diff of PI)
+            let diffFromPI = Math.abs(angleDiff - Math.PI);
+            // Also check Y offsets
+            return diffFromPI < 0.15 && Math.abs(f1YOffset) < 5 && Math.abs(f2YOffset) < 5;
+        }
 
         function resizeCanvas() {
             const rect = canvas.parentElement.getBoundingClientRect();
@@ -279,31 +377,42 @@
         function calculateNetForce() {
             const leftForce = parseFloat(document.getElementById('leftForce').value);
             const rightForce = parseFloat(document.getElementById('rightForce').value);
-            const leftDir = document.getElementById('leftDirection').value;
-            const rightDir = document.getElementById('rightDirection').value;
 
-            // Rightward positive
-            let f1 = leftDir === 'right' ? leftForce : -leftForce;
-            let f2 = rightDir === 'right' ? rightForce : -rightForce;
-            let netForce = f1 + f2;
+            // Project forces onto X-axis based on their actual angles
+            let f1x = leftForce * Math.cos(f1Angle);
+            let f2x = rightForce * Math.cos(f2Angle);
+            let netForce = f1x + f2x;
 
-            return { f1, f2, netForce, leftForce, rightForce, leftDir, rightDir };
+            return { f1: leftForce, f2: rightForce, f1x, f2x, netForce, leftForce, rightForce, leftDir: 'left', rightDir: 'right' };
         }
 
         function updateDisplay() {
-            const { f1, f2, netForce, leftForce, rightForce, leftDir, rightDir } = calculateNetForce();
+            const { f1, f2, netForce, leftForce, rightForce } = calculateNetForce();
             
             // Update force displays
             document.getElementById('leftForceValue').textContent = leftForce.toFixed(1) + ' N';
             document.getElementById('rightForceValue').textContent = rightForce.toFixed(1) + ' N';
-            document.getElementById('netForce').textContent = `ΣF = ${netForce.toFixed(2)} N`;
+            
+            // Calculate full vector net force (X and Y components)
+            const netFx = leftForce * Math.cos(f1Angle) + rightForce * Math.cos(f2Angle);
+            const netFy = leftForce * Math.sin(f1Angle) + rightForce * Math.sin(f2Angle);
+            const netFMag = Math.sqrt(netFx * netFx + netFy * netFy);
+            document.getElementById('netForce').textContent = `ΣF = ${netFMag.toFixed(2)} N`;
 
             // Update state display
-            const isBalanced = Math.abs(netForce) < 0.5;
+            const isCollinear = checkCollinear();
+            const isSameBody = (currentMode === 'collinear') || (currentMode === 'sameBody' && sameBodySubMode === 'same');
+            const isBalanced = netFMag < 0.5 && isCollinear && isSameBody;
             const stateDisplay = document.getElementById('stateDisplay');
             if (isBalanced) {
                 stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
                 stateDisplay.innerHTML = '<span class="text-tertiary">平衡状态 ✓</span>';
+            } else if (!isSameBody) {
+                stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
+                stateDisplay.innerHTML = '<span class="text-error">非平衡 — 不同体</span>';
+            } else if ((!isCollinear) && netFMag < 0.5) {
+                stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
+                stateDisplay.innerHTML = '<span class="text-error">不共线 — 物体会旋转</span>';
             } else {
                 stateDisplay.className = 'text-headline-md font-headline-md flex items-center gap-2';
                 stateDisplay.innerHTML = '<span class="text-error">非平衡状态</span>';
@@ -316,21 +425,394 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
             const scale = 20; // pixels per Newton
+            const groundY = canvas.height - 60;
 
-            const { f1, f2 } = calculateNetForce();
+            const cartBodyWidth = 80;
+            const cartBodyHeight = 40;
+            const wheelRadius = 12;
+            const wheelXOffset = 28;
+            const wheelYOffset = cartBodyHeight / 2 + 8; // = 28
 
-            // Draw object (rectangle)
-            ctx.fillStyle = '#e0e3e5';
-            ctx.fillRect(centerX - 40, centerY - 20, 80, 40);
+            // Cart center Y so wheels sit ON the ground
+            const centerY = groundY - wheelYOffset - wheelRadius; // wheels bottom = groundY
+
+            const { f1, f2, netForce } = calculateNetForce();
+            // Vector net force magnitude
+            const _lf = parseFloat(document.getElementById('leftForce').value);
+            const _rf = parseFloat(document.getElementById('rightForce').value);
+            const netFx = _lf * Math.cos(f1Angle) + _rf * Math.cos(f2Angle);
+            const netFy = _lf * Math.sin(f1Angle) + _rf * Math.sin(f2Angle);
+            const netFMag = Math.sqrt(netFx * netFx + netFy * netFy);
+
+            // Draw ground (below groundY)
+            ctx.fillStyle = '#8b7355';
+            ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
+            ctx.strokeStyle = '#5d4e37';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, groundY);
+            ctx.lineTo(canvas.width, groundY);
+            ctx.stroke();
+            // Ground texture
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            for (let i = 0; i < canvas.width; i += 20) {
+                ctx.fillRect(i, groundY, 10, 8);
+            }
+            // "光滑地面" label
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 22px "Plus Jakarta Sans", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('光滑地面', canvas.width / 2 + 100, groundY + 35);
+
+            // Calculate cart X displacement based on net force
+            const maxDisplacement = 60;
+            let displacement = 0;
+            const isCollinearDraw = checkCollinear();
+            const isBalanced = netFMag < 0.5 && isCollinearDraw;
+            if (!isBalanced) {
+                const forceRatio = Math.max(-1, Math.min(1, netFx / 12));
+                displacement = forceRatio * maxDisplacement;
+            }
+
+            const cartX = centerX + displacement;
+            currentCartX = cartX;
+
+            // Store hitbox for hover detection
+            currentCartBounds = {
+                left:   cartX - cartBodyWidth/2 - wheelXOffset,
+                right:  cartX + cartBodyWidth/2 + wheelXOffset,
+                top:    centerY - cartBodyHeight/2,
+                bottom: groundY
+            };
+
+            // ── Draw cart body ──
+            ctx.fillStyle = '#ffc857';
+            ctx.fillRect(cartX - cartBodyWidth/2, centerY - cartBodyHeight/2, cartBodyWidth, cartBodyHeight);
             ctx.strokeStyle = '#404751';
             ctx.lineWidth = 2;
-            ctx.strokeRect(centerX - 40, centerY - 20, 80, 40);
+            ctx.strokeRect(cartX - cartBodyWidth/2, centerY - cartBodyHeight/2, cartBodyWidth, cartBodyHeight);
 
-            // Draw forces
-            drawArrow(centerX - 40, centerY, f1 * scale, 0, '#005894', 'F₁'); // Left force (blue)
-            drawArrow(centerX + 40, centerY, f2 * scale, 0, '#ad3300', 'F₂'); // Right force (red)
+            // ── Draw wheels ──
+            const drawWheel = (wx, wy) => {
+                ctx.fillStyle = '#404751';
+                ctx.beginPath();
+                ctx.arc(wx, wy, wheelRadius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.strokeStyle = '#191c1e';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.strokeStyle = '#c0c0c0';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < 6; i++) {
+                    const a = (i / 6) * 2 * Math.PI;
+                    ctx.beginPath();
+                    ctx.moveTo(wx, wy);
+                    ctx.lineTo(wx + wheelRadius * Math.cos(a), wy + wheelRadius * Math.sin(a));
+                    ctx.stroke();
+                }
+                // Axle
+                ctx.strokeStyle = '#717882';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(wx, wy - wheelRadius - 2);
+                ctx.lineTo(wx, centerY + cartBodyHeight/2);
+                ctx.stroke();
+            };
+
+            drawWheel(cartX - wheelXOffset, centerY + wheelYOffset);
+            drawWheel(cartX + wheelXOffset, centerY + wheelYOffset);
+
+            // ── Hover highlight on cart ──
+            if (isHoveringCart) {
+                ctx.save();
+                ctx.strokeStyle = '#005894';
+                ctx.lineWidth = 2.5;
+                ctx.setLineDash([6, 3]);
+                ctx.strokeRect(
+                    cartX - cartBodyWidth/2 - 2, centerY - cartBodyHeight/2 - 2,
+                    cartBodyWidth + 4, cartBodyHeight + 4
+                );
+                ctx.restore();
+            }
+
+            // ── Collinear glow effect ──
+            if (checkCollinear()) {
+                ctx.save();
+                ctx.shadowColor = '#16a34a';
+                ctx.shadowBlur = 25;
+                ctx.strokeStyle = '#16a34a';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(cartX, centerY, 12, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+                ctx.restore();
+            }
+
+            // ── Draw center point on cart ──
+            ctx.fillStyle = '#191c1e';
+            ctx.beginPath();
+            ctx.arc(cartX, centerY, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // ── Draw F1 / F2 arrows from center (with draggable angle) ──
+            const f1Y = centerY + f1YOffset;
+            const f2Y = centerY + f2YOffset;
+            
+            // F1: from center, direction based on f1Angle
+            const f1Len = f1 * scale;
+            const f1StartX = cartX;
+            const f1EndX = f1StartX + f1Len * Math.cos(f1Angle);
+            const f1EndY = f1Y + f1Len * Math.sin(f1Angle);
+            drawArrowAngled(f1StartX, f1Y, f1EndX, f1EndY, '#005894', 'F₁');
+            
+            // F2: from center, direction based on f2Angle
+            const f2Len = f2 * scale;
+            const f2StartX = cartX;
+            const f2EndX = f2StartX + f2Len * Math.cos(f2Angle);
+            const f2EndY = f2Y + f2Len * Math.sin(f2Angle);
+
+            // Draw arrows with glow when collinear
+            const isCollinearNow = checkCollinear();
+            if (isCollinearNow) {
+                ctx.save();
+                ctx.shadowColor = '#16a34a';
+                ctx.shadowBlur = 15;
+            }
+            drawArrowAngled(f1StartX, f1Y, f1EndX, f1EndY, isCollinearNow ? '#0d7c3e' : '#005894', 'F₁');
+            drawArrowAngled(f2StartX, f2Y, f2EndX, f2EndY, isCollinearNow ? '#0d7c3e' : '#ad3300', 'F₂');
+            if (isCollinearNow) {
+                ctx.restore();
+                // "共线" label
+                ctx.fillStyle = '#16a34a';
+                ctx.font = 'bold 14px "Space Grotesk", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('✓ 共线', cartX, centerY - cartBodyHeight/2 - 20);
+            }
+
+            // Draw drag handles at arrow start (for Y offset)
+            drawDragHandle(f1StartX, f1Y, dragging === 'f1' ? '#005894' : '#5a9fd4');
+            drawDragHandle(f2StartX, f2Y, dragging === 'f2' ? '#ad3300' : '#d4785a');
+            
+            // Draw rotation handles at arrow end (for angle)
+            drawRotateHandle(f1EndX, f1EndY, dragging === 'f1angle' ? '#005894' : '#5a9fd4');
+            drawRotateHandle(f2EndX, f2EndY, dragging === 'f2angle' ? '#ad3300' : '#d4785a');
+
+            // Show collinear hint when close to collinear
+            if (!checkCollinear()) {
+                // Draw a dashed line showing what "collinear" would look like
+                // Average the two angles to show the "ideal" shared line
+                const avgAngle = (f1Angle + f2Angle + Math.PI) / 2;
+                ctx.save();
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = '#c0c7d3';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(cartX - 120 * Math.cos(f1Angle), centerY - 120 * Math.sin(f1Angle));
+                ctx.lineTo(cartX + 120 * Math.cos(f1Angle), centerY + 120 * Math.sin(f1Angle));
+                ctx.stroke();
+                ctx.restore();
+
+                // Check if they are close to collinear (within ~20°)
+                let angleDiff2 = ((f1Angle - f2Angle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+                let diffFromPI2 = Math.abs(angleDiff2 - Math.PI);
+                if (diffFromPI2 < 0.35) {
+                    ctx.fillStyle = '#16a34a';
+                    ctx.font = '11px "Space Grotesk", sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('接近共线 ✓', cartX, centerY - cartBodyHeight/2 - 50);
+                }
+            }
+
+            // Non-collinear rotation hint
+            const isCollinearDraw2 = checkCollinear();
+            if (!isCollinearDraw2 && netFMag < 0.5) {
+                // Draw rotation arrow to show torque
+                ctx.save();
+                ctx.strokeStyle = '#ba1a1a';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(cartX, centerY, 50, -0.8, 0.8, false);
+                ctx.stroke();
+                // Arrowhead on arc
+                const arcEndX = cartX + 50 * Math.cos(0.8);
+                const arcEndY = centerY + 50 * Math.sin(0.8);
+                drawArrowHead(arcEndX, arcEndY, 0.8 + Math.PI/2, '#ba1a1a');
+                ctx.restore();
+                // Torque label
+                ctx.fillStyle = '#ba1a1a';
+                ctx.font = 'bold 12px "Space Grotesk", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('⟳ 产生转动！', cartX, centerY - 60);
+            }
+
+            // ── Hover: Gravity (G↓) and Normal Force (N↑) ──
+            if (isHoveringCart) {
+                const cartTopY    = centerY - cartBodyHeight/2;
+                const cartCenterY = centerY;
+
+                // Equal length for both vertical arrows
+                const vArrowLen = 80;
+                const greenColor = '#16a34a';
+
+                // G arrow: from cart center downward
+                const gArrowFrom = cartCenterY;
+                const gArrowTo   = gArrowFrom + vArrowLen;
+                ctx.strokeStyle = greenColor;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(cartX, gArrowFrom);
+                ctx.lineTo(cartX, gArrowTo);
+                ctx.stroke();
+                drawArrowHead(cartX, gArrowTo, Math.PI/2, greenColor);
+
+                // N arrow: from cart top upward
+                const nArrowFrom = cartTopY;
+                const nArrowTo   = nArrowFrom - vArrowLen;
+                ctx.strokeStyle = greenColor;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(cartX, nArrowFrom);
+                ctx.lineTo(cartX, nArrowTo);
+                ctx.stroke();
+                drawArrowHead(cartX, nArrowTo, -Math.PI/2, greenColor);
+
+                // Label boxes — clamp to canvas width so they don't clip
+                const labelW = 128;
+                const labelMargin = 10;
+                let labelX = cartX + 14;
+                if (labelX + labelW > canvas.width - labelMargin) {
+                    labelX = cartX - labelW - 14;
+                }
+                drawForceLabel(labelX, nArrowTo + 10,  '#16a34a', 'N (支持力)', '≈ 9.8 N  ↑');
+                drawForceLabel(labelX, gArrowTo - 45,  '#16a34a', 'G (重力)',   '= mg ≈ 9.8 N  ↓');
+
+                // Balance annotation
+                const balX = cartX - cartBodyWidth/2 - 110;
+                const balY = cartCenterY - 14;
+                ctx.fillStyle = '#e8f5e9';
+                ctx.strokeStyle = '#00632e';
+                ctx.lineWidth = 1.5;
+                roundRect(ctx, balX, balY, 88, 28, 6);
+                ctx.fill();
+                ctx.stroke();
+                ctx.fillStyle = '#00632e';
+                ctx.font = 'bold 11px "Space Grotesk", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('N = G  ✓', balX + 44, balY + 18);
+            }
+        }
+
+        // Draw filled arrowhead at (x,y) pointing in direction
+        function drawArrowHead(x, y, direction, color) {
+            const headLen = 12;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - headLen * Math.cos(direction - Math.PI/6), y - headLen * Math.sin(direction - Math.PI/6));
+            ctx.lineTo(x - headLen * Math.cos(direction + Math.PI/6), y - headLen * Math.sin(direction + Math.PI/6));
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Draw a force label box like 提出问题's SVG labels
+        function drawForceLabel(x, y, color, title, subtitle) {
+            const w = 122, h = 42, r = 8;
+            ctx.fillStyle = 'rgba(255,255,255,0.95)';
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.5;
+            roundRect(ctx, x, y, w, h, r);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = color;
+            ctx.font = 'bold 13px "Space Grotesk", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(title, x + 10, y + 17);
+            ctx.fillStyle = '#717882';
+            ctx.font = '11px "Space Grotesk", sans-serif';
+            ctx.fillText(subtitle, x + 10, y + 33);
+        }
+
+        // Canvas rounded-rect helper
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        }
+
+        // Draw drag handle circle (for Y offset)
+        function drawDragHandle(x, y, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.globalAlpha = 0.5;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.fillStyle = 'white';
+            ctx.font = '10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('↕', x, y + 4);
+        }
+
+        // Draw rotation handle (for angle)
+        function drawRotateHandle(x, y, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, 7, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.globalAlpha = 0.4;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([3, 2]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'white';
+            ctx.font = '9px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('↻', x, y + 3);
+        }
+
+        // Draw arrow with explicit start and end points
+        function drawArrowAngled(fromX, fromY, toX, toY, color, label) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.stroke();
+
+            // Arrow head
+            const headlen = 15;
+            const angle_rad = Math.atan2(toY - fromY, toX - fromX);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - headlen * Math.cos(angle_rad - Math.PI / 6), toY - headlen * Math.sin(angle_rad - Math.PI / 6));
+            ctx.lineTo(toX - headlen * Math.cos(angle_rad + Math.PI / 6), toY - headlen * Math.sin(angle_rad + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+
+            // Label
+            ctx.fillStyle = color;
+            ctx.font = 'bold 16px "Space Grotesk"';
+            ctx.textAlign = 'center';
+            ctx.fillText(label, (fromX + toX) / 2, Math.min(fromY, toY) - 15);
         }
 
         function drawArrow(fromX, fromY, distance, angle, color, label) {
@@ -363,22 +845,170 @@
             ctx.fillText(label, fromX + distance / 2, fromY - 20);
         }
 
+        // Canvas mouse interaction (hover + drag force arrows)
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - rect.left) * (canvas.width / rect.width),
+                y: (e.clientY - rect.top)  * (canvas.height / rect.height)
+            };
+        }
+
+        function getForceHandlePositions() {
+            const centerX = canvas.width / 2;
+            const groundY = canvas.height - 60;
+            const cartBodyWidth = 80, cartBodyHeight = 40, wheelRadius = 12, wheelXOffset = 28, wheelYOffset = 28;
+            const centerY = groundY - wheelYOffset - wheelRadius;
+            const { f1, f2 } = calculateNetForce();
+            const _lf = parseFloat(document.getElementById('leftForce').value);
+            const _rf = parseFloat(document.getElementById('rightForce').value);
+            const nfx = _lf * Math.cos(f1Angle) + _rf * Math.cos(f2Angle);
+            const nfy = _lf * Math.sin(f1Angle) + _rf * Math.sin(f2Angle);
+            const nfm = Math.sqrt(nfx * nfx + nfy * nfy);
+            const scale = 20;
+            const isCollinear = checkCollinear();
+            const isBalanced = nfm < 0.5 && isCollinear;
+            const displacement = isBalanced ? 0 : Math.max(-1, Math.min(1, nfx / 12)) * 60;
+            const cartX = centerX + displacement;
+            
+            const f1StartX = cartX;
+            const f1Y = centerY + f1YOffset;
+            const f1Len = f1 * scale;
+            const f1EndX = f1StartX + f1Len * Math.cos(f1Angle);
+            const f1EndY = f1Y + f1Len * Math.sin(f1Angle);
+            
+            const f2StartX = cartX;
+            const f2Y = centerY + f2YOffset;
+            const f2Len = f2 * scale;
+            const f2EndX = f2StartX + f2Len * Math.cos(f2Angle);
+            const f2EndY = f2Y + f2Len * Math.sin(f2Angle);
+            
+            return {
+                f1: { x: f1StartX, y: f1Y },
+                f2: { x: f2StartX, y: f2Y },
+                f1End: { x: f1EndX, y: f1EndY },
+                f2End: { x: f2EndX, y: f2EndY },
+                centerY
+            };
+        }
+
+        canvas.addEventListener('mousedown', function(e) {
+            const { x, y } = getMousePos(e);
+            const handles = getForceHandlePositions();
+            const hitRadius = 16;
+            // Check angle handles first (at arrow tips)
+            if (Math.hypot(x - handles.f1End.x, y - handles.f1End.y) < hitRadius) {
+                dragging = 'f1angle';
+                dragStartX = x;
+                dragStartY = y;
+                dragStartAngle = f1Angle;
+            } else if (Math.hypot(x - handles.f2End.x, y - handles.f2End.y) < hitRadius) {
+                dragging = 'f2angle';
+                dragStartX = x;
+                dragStartY = y;
+                dragStartAngle = f2Angle;
+            }
+            // Then Y-offset handles (at arrow start)
+            else if (Math.hypot(x - handles.f1.x, y - handles.f1.y) < hitRadius) {
+                dragging = 'f1';
+                dragStartY = y;
+                dragStartOffset = f1YOffset;
+            } else if (Math.hypot(x - handles.f2.x, y - handles.f2.y) < hitRadius) {
+                dragging = 'f2';
+                dragStartY = y;
+                dragStartOffset = f2YOffset;
+            }
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            const { x, y } = getMousePos(e);
+            if (dragging) {
+                if (dragging === 'f1' || dragging === 'f2') {
+                    const dy = y - dragStartY;
+                    const newOffset = Math.max(-maxYOffset, Math.min(maxYOffset, dragStartOffset + dy));
+                    if (dragging === 'f1') f1YOffset = newOffset;
+                    else f2YOffset = newOffset;
+                } else if (dragging === 'f1angle' || dragging === 'f2angle') {
+                    // Full 360° rotation using atan2 from cart center
+                    const handles = getForceHandlePositions();
+                    const cx = handles.f1.x; // cart center X (same for both)
+                    const cy = handles.centerY;
+                    let newAngle = Math.atan2(y - cy, x - cx);
+                    // Snap to collinear when close (within ~15°)
+                    if (dragging === 'f1angle') {
+                        const idealAngle = f2Angle + Math.PI;
+                        let diff = ((newAngle - idealAngle + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
+                        if (Math.abs(diff) < 0.26) newAngle = idealAngle;
+                        f1Angle = newAngle;
+                    } else {
+                        const idealAngle = f1Angle + Math.PI;
+                        let diff = ((newAngle - idealAngle + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
+                        if (Math.abs(diff) < 0.26) newAngle = idealAngle;
+                        f2Angle = newAngle;
+                    }
+                    // Also snap Y offset to 0 when close
+                    if (Math.abs(f1YOffset) < 8) f1YOffset = 0;
+                    if (Math.abs(f2YOffset) < 8) f2YOffset = 0;
+                }
+                updateDisplay();
+                canvas.style.cursor = 'grabbing';
+                return;
+            }
+            // Check hover on handles
+            const handles = getForceHandlePositions();
+            const onF1 = Math.hypot(x - handles.f1.x, y - handles.f1.y) < 16;
+            const onF2 = Math.hypot(x - handles.f2.x, y - handles.f2.y) < 16;
+            const onF1End = Math.hypot(x - handles.f1End.x, y - handles.f1End.y) < 16;
+            const onF2End = Math.hypot(x - handles.f2End.x, y - handles.f2End.y) < 16;
+            if (onF1 || onF2 || onF1End || onF2End) {
+                canvas.style.cursor = 'grab';
+            } else {
+                // Cart hover
+                const b = currentCartBounds;
+                isHoveringCart = (x >= b.left && x <= b.right && y >= b.top && y <= b.bottom);
+                canvas.style.cursor = isHoveringCart ? 'pointer' : 'default';
+            }
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            dragging = null;
+            canvas.style.cursor = 'default';
+        });
+
+        canvas.addEventListener('mouseleave', function() {
+            dragging = null;
+            isHoveringCart = false;
+            canvas.style.cursor = 'default';
+        });
+
         // Event Listeners
         document.getElementById('leftForce').addEventListener('input', updateDisplay);
         document.getElementById('rightForce').addEventListener('input', updateDisplay);
-        document.getElementById('leftDirection').addEventListener('change', updateDisplay);
-        document.getElementById('rightDirection').addEventListener('change', updateDisplay);
 
         document.getElementById('recordBtn').addEventListener('click', function() {
-            const { leftForce, rightForce, netForce, leftDir, rightDir } = calculateNetForce();
-            const isBalanced = Math.abs(netForce) < 0.5;
+            const { leftForce, rightForce } = calculateNetForce();
+            const netFx = leftForce * Math.cos(f1Angle) + rightForce * Math.cos(f2Angle);
+            const netFy = leftForce * Math.sin(f1Angle) + rightForce * Math.sin(f2Angle);
+            const netFMag = Math.sqrt(netFx * netFx + netFy * netFy);
+            const isCollinear = checkCollinear();
+            const isSameBody = (currentMode === 'collinear') || (currentMode === 'sameBody' && sameBodySubMode === 'same');
+            const isBalanced = netFMag < 0.5 && isCollinear && isSameBody;
 
-            records.unshift({
+            let status = '不平衡';
+            if (isBalanced) status = '平衡';
+
+            // Angle in degrees for display
+            const f1Deg = Math.round(f1Angle * 180 / Math.PI);
+            const f2Deg = Math.round(f2Angle * 180 / Math.PI);
+
+            records.push({
                 num: records.length + 1,
-                left: leftForce.toFixed(1) + ' ' + (leftDir === 'right' ? '→' : '←'),
-                right: rightForce.toFixed(1) + ' ' + (rightDir === 'right' ? '→' : '←'),
-                net: netForce.toFixed(2),
-                status: isBalanced ? '平衡' : '不平衡'
+                left: leftForce.toFixed(1) + 'N ' + f1Deg + '°',
+                right: rightForce.toFixed(1) + 'N ' + f2Deg + '°',
+                net: netFMag.toFixed(2),
+                collinear: isCollinear ? '是' : '否',
+                sameBody: isSameBody ? '是' : '否',
+                status: status
             });
 
             updateRecordList();
@@ -386,8 +1016,11 @@
 
         function updateRecordList() {
             const recordList = document.getElementById('recordList');
+            // Save to localStorage for cross-page sync
+            localStorage.setItem('balanceRecords', JSON.stringify(records));
+            
             if (records.length === 0) {
-                recordList.innerHTML = '<tr class="text-on-surface-variant text-center"><td colspan="5" class="py-6">暂无记录</td></tr>';
+                recordList.innerHTML = '<tr class="text-on-surface-variant text-center"><td colspan="7" class="py-6">暂无记录</td></tr>';
                 return;
             }
 
@@ -397,15 +1030,241 @@
                     <td class="py-3 px-3">${r.left}</td>
                     <td class="py-3 px-3">${r.right}</td>
                     <td class="py-3 px-3 text-data-mono font-data-mono">${r.net} N</td>
+                    <td class="py-3 px-3"><span class="${r.collinear === '是' ? 'text-tertiary' : 'text-error'}">${r.collinear}</span></td>
+                    <td class="py-3 px-3"><span class="${r.sameBody === '是' ? 'text-tertiary' : 'text-error'}">${r.sameBody}</span></td>
                     <td class="py-3 px-3"><span class="px-2 py-1 rounded-lg ${r.status === '平衡' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-error-container text-on-error-container'}">${r.status}</span></td>
                 </tr>
             `).join('');
         }
 
         // Initialize
+        // Animation loop for smooth cart movement
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+        
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
         updateDisplay();
+        animate();
+        updateRecordList();
+
+        // ═══════════════════════════════════════════════
+        // "同体探究" Mode - Two carts demonstration
+        // ═══════════════════════════════════════════════
+        const sameBodyCanvas = document.getElementById('sameBodyCanvas');
+        const ctx2 = sameBodyCanvas.getContext('2d');
+        let sameBodyAnimFrame = null;
+        let cart1X = 0, cart2X = 0; // displacement for animation
+        let sameBodyTime = 0;
+
+        function setSameBodyMode(subMode) {
+            sameBodySubMode = subMode;
+            const btnSame = document.getElementById('btnSameBody');
+            const btnDiff = document.getElementById('btnDiffBody');
+            if (subMode === 'same') {
+                btnSame.className = 'px-3 py-1.5 rounded-md text-xs font-bold bg-primary text-on-primary transition-all';
+                btnDiff.className = 'px-3 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:bg-surface-container-low transition-all';
+            } else {
+                btnDiff.className = 'px-3 py-1.5 rounded-md text-xs font-bold bg-primary text-on-primary transition-all';
+                btnSame.className = 'px-3 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:bg-surface-container-low transition-all';
+            }
+            sameBodyTime = 0;
+            cart1X = 0;
+            cart2X = 0;
+            updateDisplay();
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const tabC = document.getElementById('tabCollinear');
+            const tabS = document.getElementById('tabSameBody');
+            const secC = document.getElementById('collinearSection');
+            const secS = document.getElementById('sameBodySection');
+            const hintC = document.getElementById('hintCollinear');
+            const hintS = document.getElementById('hintSameBody');
+            
+            if (mode === 'collinear') {
+                tabC.className = 'flex-1 py-2 px-4 rounded-lg text-label-caps font-label-caps font-bold bg-primary text-on-primary transition-all';
+                tabS.className = 'flex-1 py-2 px-4 rounded-lg text-label-caps font-label-caps font-bold text-on-surface-variant hover:bg-surface-container-low transition-all';
+                secC.classList.remove('hidden');
+                secS.classList.add('hidden');
+                hintC.classList.remove('hidden');
+                hintS.classList.add('hidden');
+            } else {
+                tabS.className = 'flex-1 py-2 px-4 rounded-lg text-label-caps font-label-caps font-bold bg-primary text-on-primary transition-all';
+                tabC.className = 'flex-1 py-2 px-4 rounded-lg text-label-caps font-label-caps font-bold text-on-surface-variant hover:bg-surface-container-low transition-all';
+                secS.classList.remove('hidden');
+                secC.classList.add('hidden');
+                hintS.classList.remove('hidden');
+                hintC.classList.add('hidden');
+                resizeSameBodyCanvas();
+                sameBodyTime = 0;
+                cart1X = 0;
+                cart2X = 0;
+                animateSameBody();
+            }
+        }
+
+        function resizeSameBodyCanvas() {
+            const rect = sameBodyCanvas.parentElement.getBoundingClientRect();
+            sameBodyCanvas.width = rect.width;
+            sameBodyCanvas.height = rect.height;
+        }
+
+        function drawSameBody() {
+            const w = sameBodyCanvas.width;
+            const h = sameBodyCanvas.height;
+            ctx2.clearRect(0, 0, w, h);
+
+            const groundY = h - 60;
+            const centerY = groundY - 48;
+            const cartW = 70, cartH = 35;
+            const wheelR = 10;
+
+            // Ground
+            ctx2.fillStyle = '#8b7355';
+            ctx2.fillRect(0, groundY, w, h - groundY);
+            ctx2.strokeStyle = '#5d4e37';
+            ctx2.lineWidth = 3;
+            ctx2.beginPath();
+            ctx2.moveTo(0, groundY);
+            ctx2.lineTo(w, groundY);
+            ctx2.stroke();
+            ctx2.fillStyle = '#ffffff';
+            ctx2.font = 'bold 22px "Plus Jakarta Sans", sans-serif';
+            ctx2.textAlign = 'center';
+            ctx2.fillText('光滑地面', w / 2, groundY + 35);
+
+            if (sameBodySubMode === 'same') {
+                // Both forces on one cart — balanced, stays still
+                const cx = w / 2;
+                drawMiniCart(ctx2, cx, centerY, cartW, cartH, wheelR, groundY, '#4dabf7', '');
+                // F1 ← and F2 → on same cart
+                drawForceArrowSimple(ctx2, cx - cartW/2, centerY, -80, '#005894', 'F₁ = 5N ←');
+                drawForceArrowSimple(ctx2, cx + cartW/2, centerY, 80, '#ad3300', 'F₂ = 5N →');
+
+                // Status
+                ctx2.fillStyle = '#16a34a';
+                ctx2.font = 'bold 14px "Space Grotesk", sans-serif';
+                ctx2.textAlign = 'center';
+                ctx2.fillText('两力作用在同一物体上 → 满足"同体"条件', w / 2, 40);
+
+                // Checklist
+                const checkX = w / 2 - 160;
+                const checkY = 60;
+                ctx2.font = '13px "Space Grotesk", sans-serif';
+                ctx2.textAlign = 'left';
+                ctx2.fillStyle = '#16a34a';
+                ctx2.fillText('✓ 大小相等', checkX, checkY);
+                ctx2.fillText('✓ 方向相反', checkX + 100, checkY);
+                ctx2.fillText('✓ 共线', checkX + 200, checkY);
+                ctx2.fillText('✓ 同体', checkX + 270, checkY);
+
+                // Balance badge
+                ctx2.fillStyle = '#16a34a';
+                ctx2.font = 'bold 13px "Space Grotesk", sans-serif';
+                ctx2.textAlign = 'center';
+                ctx2.fillText('→ 二力平衡 ✓', w / 2, 80);
+            } else {
+                // Forces on different carts — animate apart
+                sameBodyTime += 0.02;
+                const speed = Math.min(sameBodyTime * 20, 80);
+                cart1X = -speed;
+                cart2X = speed;
+
+                // Cart A (left, force pushes left)
+                const ax = w / 2 - 80 + cart1X;
+                drawMiniCart(ctx2, ax, centerY, cartW, cartH, wheelR, groundY, '#4dabf7', 'A');
+                drawForceArrowSimple(ctx2, ax - cartW/2, centerY, -80, '#005894', 'F₁ = 5N ←');
+
+                // Cart B (right, force pushes right)
+                const bx = w / 2 + 80 + cart2X;
+                drawMiniCart(ctx2, bx, centerY, cartW, cartH, wheelR, groundY, '#ffc857', 'B');
+                drawForceArrowSimple(ctx2, bx + cartW/2, centerY, 80, '#ad3300', 'F₂ = 5N →');
+
+                // Status
+                ctx2.fillStyle = '#ba1a1a';
+                ctx2.font = 'bold 14px "Space Grotesk", sans-serif';
+                ctx2.textAlign = 'center';
+                ctx2.fillText('两力作用在不同物体上 → 不是平衡力！', w / 2, 40);
+
+                // Checklist
+                const checkX = w / 2 - 160;
+                const checkY = 60;
+                ctx2.font = '13px "Space Grotesk", sans-serif';
+                ctx2.textAlign = 'left';
+                ctx2.fillStyle = '#16a34a';
+                ctx2.fillText('✓ 大小相等', checkX, checkY);
+                ctx2.fillText('✓ 方向相反', checkX + 100, checkY);
+                ctx2.fillText('✓ 共线', checkX + 200, checkY);
+                ctx2.fillStyle = '#ba1a1a';
+                ctx2.font = 'bold 13px "Space Grotesk", sans-serif';
+                ctx2.fillText('✗ 不同体！', checkX + 270, checkY);
+            }
+        }
+
+        function drawMiniCart(c, cx, cy, cw, ch, wr, groundY, color, label) {
+            // Body
+            c.fillStyle = color;
+            c.fillRect(cx - cw/2, cy - ch/2, cw, ch);
+            c.strokeStyle = '#404751';
+            c.lineWidth = 2;
+            c.strokeRect(cx - cw/2, cy - ch/2, cw, ch);
+            // Label
+            c.fillStyle = '#191c1e';
+            c.font = 'bold 16px "Space Grotesk"';
+            c.textAlign = 'center';
+            c.fillText(label, cx, cy + 6);
+            // Wheels
+            const wy = cy + ch/2 + wr + 4;
+            for (let dx of [-20, 20]) {
+                c.fillStyle = '#404751';
+                c.beginPath();
+                c.arc(cx + dx, wy, wr, 0, 2 * Math.PI);
+                c.fill();
+                c.strokeStyle = '#191c1e';
+                c.lineWidth = 1.5;
+                c.stroke();
+            }
+        }
+
+        function drawForceArrowSimple(c, startX, startY, length, color, label) {
+            const endX = startX + length;
+            c.strokeStyle = color;
+            c.lineWidth = 3;
+            c.beginPath();
+            c.moveTo(startX, startY);
+            c.lineTo(endX, startY);
+            c.stroke();
+            // Arrowhead
+            const dir = length > 0 ? 0 : Math.PI;
+            const headLen = 12;
+            c.fillStyle = color;
+            c.beginPath();
+            c.moveTo(endX, startY);
+            c.lineTo(endX - headLen * Math.cos(dir - Math.PI/6), startY - headLen * Math.sin(dir - Math.PI/6));
+            c.lineTo(endX - headLen * Math.cos(dir + Math.PI/6), startY - headLen * Math.sin(dir + Math.PI/6));
+            c.closePath();
+            c.fill();
+            // Label
+            c.fillStyle = color;
+            c.font = 'bold 12px "Space Grotesk"';
+            c.textAlign = 'center';
+            c.fillText(label, startX + length/2, startY - 15);
+        }
+
+        function animateSameBody() {
+            if (currentMode !== 'sameBody') return;
+            drawSameBody();
+            sameBodyAnimFrame = requestAnimationFrame(animateSameBody);
+        }
+
+        window.addEventListener('resize', function() {
+            if (currentMode === 'sameBody') resizeSameBodyCanvas();
+        });
     </script>
+<script src="assets/sidebar.js"></script>
 </body>
 </html>

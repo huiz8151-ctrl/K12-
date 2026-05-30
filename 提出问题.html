@@ -3,7 +3,8 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PhysicsLab Pro - 提出问题</title>
+<title>科大讯飞 - 提出问题</title>
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -123,7 +124,7 @@
 <!-- TopAppBar -->
 <header class="bg-surface-bright dark:bg-surface-dim shadow-sm docked full-width top-0 z-50 flex justify-between items-center w-full px-stage-margin py-unit max-w-full">
 <div class="flex items-center gap-4">
-<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed">PhysicsLab Pro</span>
+<span class="flex items-center gap-2"><img src="assets/logo.jpg" alt="科大讯飞" class="h-12"/></span>
 </div>
 <nav class="hidden md:flex gap-8">
 <a class="text-label-caps font-label-caps text-secondary dark:text-secondary-fixed-dim border-b-4 border-secondary dark:border-secondary-fixed-dim pb-1" href="提出问题.html">提出问题</a>
@@ -141,50 +142,59 @@
 </header>
 <div class="flex-1 flex overflow-hidden">
 <!-- SideNavBar -->
-<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-surface-container-highest dark:bg-inverse-surface w-control-panel-width shadow-md">
-<div class="p-6">
-<div class="flex items-center gap-3 mb-1">
-<span class="material-symbols-outlined text-primary text-3xl">science</span>
-<span class="text-label-caps font-label-caps font-black text-on-surface">Junior Lab</span>
+<aside id="sidebar" class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-white shadow-md w-control-panel-width transition-all duration-300 overflow-hidden">
+<div class="p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">science</span>
+<div class="sidebar-text overflow-hidden whitespace-nowrap">
+<span class="text-label-caps font-label-caps font-black text-on-surface block">初中实验室</span>
+<p class="text-xs text-on-surface-variant">第一章：力学</p>
 </div>
-<p class="text-xs text-on-surface-variant">Level 1: Mechanics</p>
 </div>
 <nav class="flex-1 px-2 space-y-1">
 <div class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl m-2 p-3 flex items-center gap-4 translate-x-1 transition-transform duration-200 cursor-pointer">
 <span class="material-symbols-outlined">science</span>
-<span class="text-label-caps font-label-caps">力学实验</span>
+<span class="text-label-caps font-label-caps sidebar-text">力学实验</span>
 </div>
 <div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
 <span class="material-symbols-outlined">visibility</span>
-<span class="text-label-caps font-label-caps">光学探究</span>
+<span class="text-label-caps font-label-caps sidebar-text">光学探究</span>
 </div>
 <div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
 <span class="material-symbols-outlined">bolt</span>
-<span class="text-label-caps font-label-caps">电磁工作台</span>
+<span class="text-label-caps font-label-caps sidebar-text">电磁工作台</span>
 </div>
 <div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
 <span class="material-symbols-outlined">thermostat</span>
-<span class="text-label-caps font-label-caps">热学实验室</span>
+<span class="text-label-caps font-label-caps sidebar-text">热学实验室</span>
 </div>
 </nav>
-<div class="p-4 border-t border-outline-variant/30">
-<button class="w-full bg-secondary py-3 px-4 rounded-xl text-white font-bold shadow-tactile hover:brightness-110 active:scale-95 transition-all">
-                    Start Simulation
-                </button>
+<div class="p-4 bg-primary-fixed rounded-2xl m-4 sidebar-content">
+<p class="text-sm font-bold text-on-primary-fixed-variant mb-2">掌握进度</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[25%]"></div>
+</div>
+<p class="text-xs mt-2 text-on-primary-fixed-variant">25% - 初识二力平衡</p>
 </div>
 <div class="p-2 flex flex-col gap-1">
 <div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
 <span class="material-symbols-outlined">help</span>
-<span class="text-label-caps font-label-caps">Help</span>
+<span class="text-label-caps font-label-caps sidebar-text">帮助</span>
 </div>
 <div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
 <span class="material-symbols-outlined">history</span>
-<span class="text-label-caps font-label-caps">History</span>
+<span class="text-label-caps font-label-caps sidebar-text">历史</span>
 </div>
+</div>
+<!-- Collapse Toggle -->
+<div class="p-2 border-t border-outline-variant">
+<button id="sidebarToggle" onclick="toggleSidebar()" class="w-full flex items-center justify-center gap-2 p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" id="toggleIcon">left_panel_close</span>
+<span class="sidebar-text text-xs">收起侧栏</span>
+</button>
 </div>
 </aside>
 <!-- Main Content (The Stage) -->
-<main class="flex-1 ml-control-panel-width mt-0 p-stage-margin flex flex-col gap-stage-margin relative overflow-y-auto">
+<main class="flex-1 ml-control-panel-width mt-0 px-stage-margin py-stage-margin flex flex-col gap-stage-margin relative overflow-y-auto">
 <!-- Breadcrumbs -->
 <nav class="flex items-center gap-2 text-on-surface-variant">
 <span class="text-label-caps font-label-caps">物理实验库</span>
@@ -196,61 +206,161 @@
 <div class="grid grid-cols-12 gap-gutter flex-1">
 <!-- Simulation Canvas Area -->
 <div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
-<div class="bg-white rounded-3xl shadow-tactile flex-1 relative stage-grid overflow-hidden border border-surface-container-highest">
-<!-- Scene: The Desktop -->
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="relative group">
-<!-- Desk Surface (Book Scene) -->
-<div id="deskSurface" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-4 bg-surface-container-high rounded-full blur-sm opacity-50"></div>
-<!-- Ceiling Line (Lamp Scene) -->
-<div id="ceilingLine" class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-1 bg-surface-container-high opacity-0 transition-opacity duration-300"></div>
+<div class="bg-white rounded-3xl shadow-tactile relative stage-grid overflow-hidden border border-surface-container-highest" style="min-height:420px; height:420px">
+<!-- Scene SVG Canvas -->
+<svg id="sceneSvg" class="absolute inset-0 w-full h-full" viewBox="0 0 660 420" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#ba1a1a"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#ad3300"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#00632e"/>
+    </marker>
+    <!-- Wall hatch pattern -->
+    <pattern id="wallHatch" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="12" stroke="#c0c7d3" stroke-width="2"/>
+    </pattern>
+    <!-- Wood grain pattern for desk -->
+    <pattern id="woodGrain" patternUnits="userSpaceOnUse" width="40" height="20">
+      <rect width="40" height="20" fill="#c8a47e"/>
+      <path d="M0,10 Q10,8 20,10 Q30,12 40,10" stroke="#b8915a" stroke-width="0.8" fill="none"/>
+      <path d="M0,5 Q15,3 30,5 Q35,6 40,5" stroke="#c4a070" stroke-width="0.5" fill="none"/>
+      <path d="M0,15 Q12,13 25,15 Q33,17 40,15" stroke="#b8915a" stroke-width="0.5" fill="none"/>
+    </pattern>
+  </defs>
 
-<!-- Scene Display Container -->
-<div id="sceneDisplay" class="relative z-10">
-  <!-- Book Scene -->
-  <div id="bookScene" class="relative w-48 h-64 bg-primary-container rounded-lg shadow-2xl transform perspective-1000 rotate-x-12 flex flex-col items-center justify-center border-2 border-primary group-hover:-translate-y-2 transition-transform duration-500 cursor-grab active:cursor-grabbing">
-    <div class="w-32 h-40 bg-white/10 rounded flex flex-col p-4 gap-2">
-      <div class="w-full h-2 bg-white/20 rounded"></div>
-      <div class="w-3/4 h-2 bg-white/20 rounded"></div>
-      <div class="w-1/2 h-2 bg-white/20 rounded"></div>
-    </div>
-    <span class="mt-4 text-on-primary-container font-headline-sm font-bold opacity-80">PHYSICS</span>
-  </div>
+  <!-- ══════════════ BOOK SCENE ══════════════ -->
+  <g id="bookSceneSvg">
+    <!-- Ceiling / back wall -->
+    <rect x="150" y="20" width="360" height="16" rx="4" fill="#e0e3e5"/>
+    <rect x="150" y="20" width="360" height="38" fill="url(#wallHatch)" opacity="0.4"/>
+    <text x="330" y="14" text-anchor="middle" font-size="10" fill="#717882" font-family="Space Grotesk" letter-spacing="2">天 花 板</text>
 
-  <!-- Lamp Scene (Hidden by default) -->
-  <div id="lampScene" class="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-    <!-- Lamp String -->
-    <div class="absolute top-0 w-1 h-20 bg-surface-container-high"></div>
-    <!-- Lamp Bulb -->
-    <div class="relative w-24 h-24 bg-yellow-300 rounded-full shadow-2xl flex items-center justify-center border-2 border-yellow-400">
-      <!-- Bulb shine -->
-      <div class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-200 to-transparent opacity-40"></div>
+    <!-- Floor / Desk surface -->
+    <!-- Desk legs -->
+    <rect x="195" y="305" width="14" height="70" rx="3" fill="#a07850"/>
+    <rect x="451" y="305" width="14" height="70" rx="3" fill="#a07850"/>
+    <rect x="210" y="345" width="240" height="8" rx="2" fill="#906840"/>
+    <!-- Desk top surface -->
+    <rect x="170" y="288" width="320" height="22" rx="5" fill="url(#woodGrain)" stroke="#9a7040" stroke-width="1.5"/>
+    <!-- Desk edge shadow -->
+    <rect x="170" y="308" width="320" height="4" rx="2" fill="#8a6030" opacity="0.5"/>
+    <!-- Floor -->
+    <rect x="100" y="374" width="460" height="8" rx="2" fill="#dde0e4"/>
+    <text x="330" y="395" text-anchor="middle" font-size="10" fill="#717882" font-family="Space Grotesk" letter-spacing="2">地 板</text>
+
+    <!-- The Book -->
+    <g id="bookObj" class="cursor-pointer" style="cursor:pointer">
+      <!-- Book shadow -->
+      <ellipse cx="330" cy="296" rx="52" ry="6" fill="rgba(0,0,0,0.15)"/>
+      <!-- Book body -->
+      <rect x="284" y="155" width="92" height="140" rx="6" fill="#0071bc" stroke="#005894" stroke-width="2"/>
+      <!-- Book spine -->
+      <rect x="284" y="155" width="12" height="140" rx="3" fill="#005894"/>
+      <!-- Book pages edge -->
+      <rect x="370" y="157" width="6" height="136" rx="2" fill="#e8f0fa" opacity="0.8"/>
+      <!-- Book cover lines -->
+      <rect x="304" y="185" width="60" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+      <rect x="304" y="198" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+      <rect x="304" y="211" width="55" height="3" rx="1.5" fill="rgba(255,255,255,0.20)"/>
+      <rect x="304" y="224" width="45" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+      <!-- Title -->
+      <text x="330" y="258" text-anchor="middle" font-size="11" font-weight="bold" fill="rgba(255,255,255,0.85)" font-family="Space Grotesk" letter-spacing="1">物理</text>
+      <!-- Hover invisible overlay -->
+      <rect x="284" y="155" width="92" height="140" rx="6" fill="transparent" id="bookHoverZone"/>
+    </g>
+
+    <!-- Force arrows - shown on hover, hidden by default -->
+    <g id="bookForces" opacity="0" style="transition:opacity 0.25s; pointer-events:none">
+      <!-- N (Normal Force) - pointing UP -->
+      <line x1="330" y1="155" x2="330" y2="58" stroke="#ba1a1a" stroke-width="3" marker-end="url(#arrowRed)"/>
+      <!-- Force label N -->
+      <rect x="338" y="75" width="110" height="42" rx="8" fill="white" stroke="#ba1a1a" stroke-width="1.5" opacity="0.95"/>
+      <text x="348" y="92" font-size="13" font-weight="bold" fill="#ba1a1a" font-family="Space Grotesk">N (支持力)</text>
+      <text x="348" y="109" font-size="11" fill="#717882" font-family="Space Grotesk">≈ 2.45 N ↑</text>
+
+      <!-- G (Gravity) - pointing DOWN -->
+      <line x1="330" y1="295" x2="330" y2="368" stroke="#ad3300" stroke-width="3" marker-end="url(#arrowOrange)"/>
+      <!-- Force label G -->
+      <rect x="338" y="315" width="110" height="42" rx="8" fill="white" stroke="#ad3300" stroke-width="1.5" opacity="0.95"/>
+      <text x="348" y="332" font-size="13" font-weight="bold" fill="#ad3300" font-family="Space Grotesk">G (重力)</text>
+      <text x="348" y="349" font-size="11" fill="#717882" font-family="Space Grotesk">= mg ≈ 2.45 N ↓</text>
+
+      <!-- Balance annotation -->
+      <rect x="175" y="210" width="88" height="28" rx="6" fill="#e8f5e9" stroke="#00632e" stroke-width="1.5"/>
+      <text x="219" y="229" text-anchor="middle" font-size="11" font-weight="bold" fill="#00632e" font-family="Space Grotesk">N = G ✓</text>
+    </g>
+  </g>
+
+  <!-- ══════════════ LAMP SCENE ══════════════ -->
+  <g id="lampSceneSvg" opacity="0" style="pointer-events:none; transition:opacity 0.3s">
+    <!-- Ceiling with wall texture -->
+    <rect x="100" y="20" width="460" height="52" fill="url(#wallHatch)" opacity="0.5"/>
+    <rect x="100" y="20" width="460" height="52" fill="#e8eaec" opacity="0.6"/>
+    <rect x="100" y="68" width="460" height="6" rx="2" fill="#c8cacf"/>
+    <text x="330" y="14" text-anchor="middle" font-size="10" fill="#717882" font-family="Space Grotesk" letter-spacing="2">天 花 板</text>
+
+    <!-- Ceiling hook attachment point -->
+    <circle cx="330" cy="72" r="6" fill="#717882"/>
+    <path d="M326,66 Q330,58 334,66" stroke="#9a9a9a" stroke-width="2" fill="none"/>
+
+    <!-- Lamp wire/string -->
+    <line x1="330" y1="72" x2="330" y2="158" stroke="#555" stroke-width="2.5"/>
+    <!-- Wire sleeve -->
+    <rect x="328" y="72" width="4" height="86" rx="2" fill="#666"/>
+
+    <!-- Lamp socket -->
+    <rect x="315" y="155" width="30" height="18" rx="4" fill="#888"/>
+    <rect x="318" y="158" width="24" height="12" rx="2" fill="#aaa"/>
+
+    <!-- Lamp bulb -->
+    <g id="lampObj" class="cursor-pointer" style="cursor:pointer">
+      <!-- Glow effect -->
+      <ellipse cx="330" cy="215" rx="55" ry="55" fill="rgba(255,235,50,0.12)"/>
+      <!-- Bulb glass dome -->
+      <path d="M298,215 Q298,173 330,173 Q362,173 362,215 Q362,240 348,250 L312,250 Q298,240 298,215 Z" fill="#fef9c3" stroke="#fbbf24" stroke-width="2"/>
+      <!-- Bulb highlight -->
+      <ellipse cx="316" cy="192" rx="8" ry="10" fill="white" opacity="0.45"/>
       <!-- Filament -->
-      <svg class="absolute w-8 h-8" viewBox="0 0 100 100">
-        <path d="M50 20 Q40 30 40 40 Q40 50 50 50 Q60 50 60 40 Q60 30 50 20" stroke="currentColor" stroke-width="2" fill="none" class="text-yellow-700" />
-      </svg>
-    </div>
-    <!-- Lamp base -->
-    <div class="absolute -bottom-16 w-32 h-8 bg-surface-container-high rounded-lg opacity-50"></div>
-  </div>
-</div>
-<!-- Vector Indicator (Subtle) -->
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-<div class="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-<div class="w-1 h-12 bg-error rounded-full relative">
-<div class="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 border-t-2 border-l-2 border-error rotate-45"></div>
-</div>
-<span class="text-[10px] font-bold text-error uppercase mt-1">N (Normal)</span>
-</div>
-<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-<span class="text-[10px] font-bold text-secondary uppercase mb-1">G (Gravity)</span>
-<div class="w-1 h-12 bg-secondary rounded-full relative">
-<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-3 border-b-2 border-r-2 border-secondary rotate-45"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
+      <path d="M315,218 Q322,205 330,218 Q338,205 345,218" stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- Bulb base/cap -->
+      <rect x="312" y="250" width="36" height="16" rx="3" fill="#d97706"/>
+      <rect x="315" y="255" width="30" height="2" rx="1" fill="#b45309"/>
+      <rect x="315" y="260" width="30" height="2" rx="1" fill="#b45309"/>
+      <!-- Hover zone -->
+      <rect x="295" y="170" width="70" height="100" rx="10" fill="transparent" id="lampHoverZone"/>
+    </g>
+
+    <!-- Floor -->
+    <rect x="100" y="374" width="460" height="8" rx="2" fill="#dde0e4"/>
+    <text x="330" y="395" text-anchor="middle" font-size="10" fill="#717882" font-family="Space Grotesk" letter-spacing="2">地 板</text>
+
+    <!-- Force arrows - shown on hover -->
+    <g id="lampForces" opacity="0" style="transition:opacity 0.25s; pointer-events:none">
+      <!-- T (Tension) - pointing UP -->
+      <line x1="330" y1="173" x2="330" y2="95" stroke="#00632e" stroke-width="3" marker-end="url(#arrowGreen)"/>
+      <!-- Force label T -->
+      <rect x="338" y="96" width="118" height="42" rx="8" fill="white" stroke="#00632e" stroke-width="1.5" opacity="0.95"/>
+      <text x="348" y="113" font-size="13" font-weight="bold" fill="#00632e" font-family="Space Grotesk">T (拉力)</text>
+      <text x="348" y="130" font-size="11" fill="#717882" font-family="Space Grotesk">≈ 0.98 N ↑</text>
+
+      <!-- G (Gravity) - pointing DOWN -->
+      <line x1="330" y1="270" x2="330" y2="350" stroke="#ad3300" stroke-width="3" marker-end="url(#arrowOrange)"/>
+      <!-- Force label G -->
+      <rect x="338" y="296" width="118" height="42" rx="8" fill="white" stroke="#ad3300" stroke-width="1.5" opacity="0.95"/>
+      <text x="348" y="313" font-size="13" font-weight="bold" fill="#ad3300" font-family="Space Grotesk">G (重力)</text>
+      <text x="348" y="330" font-size="11" fill="#717882" font-family="Space Grotesk">= mg ≈ 0.98 N ↓</text>
+
+      <!-- Balance annotation -->
+      <rect x="175" y="212" width="92" height="28" rx="6" fill="#e8f5e9" stroke="#00632e" stroke-width="1.5"/>
+      <text x="221" y="231" text-anchor="middle" font-size="11" font-weight="bold" fill="#00632e" font-family="Space Grotesk">T = G ✓</text>
+    </g>
+  </g>
+</svg>
 <!-- Atmospheric Label -->
 <div class="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur rounded-full border border-primary/20">
 <span class="relative flex h-3 w-3">
@@ -273,7 +383,7 @@
 <div class="bg-surface-container rounded-2xl p-6 flex items-center gap-8 shadow-sm">
 <div class="flex-1 space-y-2">
 <p class="text-label-caps font-label-caps text-on-surface-variant">当前状态</p>
-<div class="text-headline-sm font-headline-sm text-on-surface">保持静止 (Static)</div>
+<div class="text-headline-sm font-headline-sm text-on-surface">保持静止</div>
 </div>
 <div class="h-12 w-px bg-outline-variant/30"></div>
 <div class="flex-1 space-y-2">
@@ -284,48 +394,39 @@
 </div>
 </div>
 </div>
-<!-- Guidance & Inquiry Panel -->
-<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-5">
 <!-- Inquiry Card -->
-<div class="bg-white rounded-3xl p-8 shadow-tactile border-t-4 border-primary flex-1 flex flex-col">
-<div class="bg-primary-fixed w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-primary text-4xl">lightbulb</span>
+<div class="bg-white rounded-2xl p-6 shadow-tactile border-t-4 border-primary flex flex-col gap-5">
+<div class="flex items-center gap-2">
+<div class="bg-primary-fixed w-9 h-9 rounded-xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl">lightbulb</span>
 </div>
-<h2 class="text-headline-md font-headline-md text-on-surface mb-6 leading-tight">
-                            为什么书本能乖乖呆在桌上？
-                        </h2>
-<div class="space-y-6 flex-1">
-<p class="text-body-lg font-body-lg text-on-surface-variant italic leading-relaxed">
-                                “生活中，很多物体虽然受力，但依然保持静止。比如桌上的书、天花板下的灯。”
-                            </p>
-<div class="p-4 bg-surface-container-low rounded-2xl border-l-4 border-tertiary">
-<p class="text-body-lg font-body-lg font-medium text-on-surface">
-                                    你觉得，这些物体在什么受力条件下会保持这种<span class="text-tertiary underline decoration-2 underline-offset-4">“平衡状态”</span>呢？
-                                </p>
-</div>
-<div class="grid grid-cols-2 gap-3">
-<div id="bookCard" class="bg-surface-container rounded-xl p-4 flex flex-col items-center text-center gap-2 group cursor-pointer hover:bg-primary-fixed transition-colors ring-2 ring-transparent hover:ring-primary" onclick="switchScene('book')">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">book</span>
-<span class="text-xs font-bold uppercase">桌上的书</span>
-</div>
-<div id="lampCard" class="bg-surface-container rounded-xl p-4 flex flex-col items-center text-center gap-2 group cursor-pointer hover:bg-primary-fixed transition-colors ring-2 ring-transparent hover:ring-primary" onclick="switchScene('lamp')">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">tungsten</span>
-<span class="text-xs font-bold uppercase">悬挂的灯</span>
+<div>
+<h2 class="text-body-lg font-bold text-on-surface leading-snug">为什么书本能静止在桌上？</h2>
 </div>
 </div>
+<p class="text-body-md font-body-md text-on-surface-variant italic leading-snug">"生活中，很多物体虽然受力，但依然保持静止。比如桌上的书、天花板下的灯。"</p>
+<div class="px-3 py-2 bg-surface-container-low rounded-xl border-l-4 border-tertiary">
+<p class="text-body-md font-body-md font-medium text-on-surface leading-snug">你觉得，这些物体在什么受力条件下会保持这种<span class="text-tertiary underline decoration-2 underline-offset-4">"平衡状态"</span>呢？</p>
 </div>
-<div class="mt-8">
-<button class="w-full bg-primary text-white py-5 rounded-2xl text-xl font-bold flex items-center justify-center gap-3 shadow-tactile hover:scale-[1.02] active:scale-95 transition-all" onclick="location.reload()">
+<div class="grid grid-cols-2 gap-2">
+<div id="bookCard" class="bg-surface-container rounded-xl p-3 flex flex-col items-center text-center gap-1 cursor-pointer hover:bg-primary-fixed transition-colors ring-2 ring-transparent hover:ring-primary" onclick="switchScene('book')">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">book</span>
+<span class="text-xs font-bold">桌上的书</span>
+</div>
+<div id="lampCard" class="bg-surface-container rounded-xl p-3 flex flex-col items-center text-center gap-1 cursor-pointer hover:bg-primary-fixed transition-colors ring-2 ring-transparent hover:ring-primary" onclick="switchScene('lamp')">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">tungsten</span>
+<span class="text-xs font-bold">悬挂的灯</span>
+</div>
+</div>
+<a href="lesson-balance.html" class="w-full bg-red-600 text-white py-3 rounded-xl text-base font-bold flex items-center justify-center gap-2 shadow-tactile hover:bg-red-700 active:scale-95 transition-all">
 <span>开始探究</span>
-<span class="material-symbols-outlined">rocket_launch</span>
-</button>
-<p class="text-center mt-4 text-xs font-label-caps text-outline uppercase tracking-widest">点击进入“动手实验”环节</p>
-</div>
-</div>
+<span class="material-symbols-outlined text-lg">rocket_launch</span>
+</a>
 <!-- Secondary Info -->
-<div class="bg-tertiary-container rounded-2xl p-4 text-on-tertiary-container flex items-start gap-4">
-<span class="material-symbols-outlined">info</span>
-<div class="text-sm">
+<div class="bg-tertiary-container rounded-xl p-3 text-on-tertiary-container flex items-start gap-3">
+<span class="material-symbols-outlined text-lg shrink-0">info</span>
+<div class="text-xs">
 <p class="font-bold mb-1">实验小贴士</p>
 <p class="opacity-80">二力平衡是指物体受到两个力的作用而保持静止或匀速直线运动状态。</p>
 </div>
@@ -338,19 +439,19 @@
 <footer class="md:hidden bg-surface-container-lowest dark:bg-on-surface fixed bottom-0 left-0 w-full z-50 flex justify-center items-center gap-gutter h-16 px-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl">
 <div class="bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-6 py-2 flex items-center gap-2">
 <span class="material-symbols-outlined">trending_flat</span>
-<span class="text-label-caps font-label-caps">Forces</span>
+<span class="text-label-caps font-label-caps">力</span>
 </div>
 <div class="text-on-surface-variant dark:text-outline-variant px-6 py-2 flex items-center gap-2">
 <span class="material-symbols-outlined">speed</span>
-<span class="text-label-caps font-label-caps">Velocity</span>
+<span class="text-label-caps font-label-caps">速度</span>
 </div>
 <div class="text-on-surface-variant dark:text-outline-variant px-6 py-2 flex items-center gap-2">
 <span class="material-symbols-outlined">numbers</span>
-<span class="text-label-caps font-label-caps">Values</span>
+<span class="text-label-caps font-label-caps">数值</span>
 </div>
 <div class="text-on-surface-variant dark:text-outline-variant px-6 py-2 flex items-center gap-2">
 <span class="material-symbols-outlined">weight</span>
-<span class="text-label-caps font-label-caps">Masses</span>
+<span class="text-label-caps font-label-caps">质量</span>
 </div>
 </footer>
 <script>
@@ -359,37 +460,30 @@
         
         function switchScene(scene) {
             currentScene = scene;
-            const bookScene = document.getElementById('bookScene');
-            const lampScene = document.getElementById('lampScene');
-            const deskSurface = document.getElementById('deskSurface');
-            const ceilingLine = document.getElementById('ceilingLine');
+            const bookSceneSvg = document.getElementById('bookSceneSvg');
+            const lampSceneSvg = document.getElementById('lampSceneSvg');
             const bookCard = document.getElementById('bookCard');
             const lampCard = document.getElementById('lampCard');
+            // Hide forces when switching
+            const bf = document.getElementById('bookForces');
+            const lf = document.getElementById('lampForces');
+            if (bf) bf.style.opacity = '0';
+            if (lf) lf.style.opacity = '0';
             
             if (scene === 'book') {
-                // Show book scene
-                bookScene.style.opacity = '1';
-                bookScene.style.pointerEvents = 'auto';
-                lampScene.style.opacity = '0';
-                lampScene.style.pointerEvents = 'none';
-                deskSurface.style.opacity = '0.5';
-                ceilingLine.style.opacity = '0';
-                
-                // Update card styles
+                bookSceneSvg.style.opacity = '1';
+                bookSceneSvg.style.pointerEvents = 'auto';
+                lampSceneSvg.style.opacity = '0';
+                lampSceneSvg.style.pointerEvents = 'none';
                 bookCard.classList.add('ring-primary', 'bg-primary-fixed');
                 bookCard.classList.remove('ring-transparent');
                 lampCard.classList.remove('ring-primary', 'bg-primary-fixed');
                 lampCard.classList.add('ring-transparent');
             } else if (scene === 'lamp') {
-                // Show lamp scene
-                bookScene.style.opacity = '0';
-                bookScene.style.pointerEvents = 'none';
-                lampScene.style.opacity = '1';
-                lampScene.style.pointerEvents = 'auto';
-                deskSurface.style.opacity = '0';
-                ceilingLine.style.opacity = '1';
-                
-                // Update card styles
+                lampSceneSvg.style.opacity = '1';
+                lampSceneSvg.style.pointerEvents = 'auto';
+                bookSceneSvg.style.opacity = '0';
+                bookSceneSvg.style.pointerEvents = 'none';
                 lampCard.classList.add('ring-primary', 'bg-primary-fixed');
                 lampCard.classList.remove('ring-transparent');
                 bookCard.classList.remove('ring-primary', 'bg-primary-fixed');
@@ -399,25 +493,26 @@
         
         // Initialize with book scene
         switchScene('book');
-        
-        // Simple micro-interaction for the "Start" button
-        document.querySelector('button.bg-primary').addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(2px) scale(0.98)';
-        });
-        document.querySelector('button.bg-primary').addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(0) scale(1.02)';
-        });
-        
-        // Dynamic Book Interaction
-        const sceneDisplay = document.getElementById('sceneDisplay');
-        const bookScene = document.getElementById('bookScene');
-        bookScene.addEventListener('mousedown', () => {
-            bookScene.classList.replace('cursor-grab', 'cursor-grabbing');
-        });
-        document.addEventListener('mouseup', () => {
-            if (bookScene.classList.contains('cursor-grabbing')) {
-                bookScene.classList.replace('cursor-grabbing', 'cursor-grab');
-            }
-        });
+
+        // ── Force Arrow Hover ────────────────────────────
+        function bindHover(triggerId, forcesId) {
+            const trigger = document.getElementById(triggerId);
+            const forces  = document.getElementById(forcesId);
+            if (!trigger || !forces) return;
+            trigger.addEventListener('mouseenter', () => { forces.style.opacity = '1'; });
+            trigger.addEventListener('mouseleave', () => { forces.style.opacity = '0'; });
+        }
+        bindHover('bookObj',       'bookForces');
+        bindHover('bookHoverZone', 'bookForces');
+        bindHover('lampObj',       'lampForces');
+        bindHover('lampHoverZone', 'lampForces');
+
+        // ── Start button micro-interaction ───────────────
+        const startBtn = document.querySelector('button.bg-primary');
+        if (startBtn) {
+            startBtn.addEventListener('mousedown', function() { this.style.transform = 'translateY(2px) scale(0.98)'; });
+            startBtn.addEventListener('mouseup',   function() { this.style.transform = 'translateY(0) scale(1.02)'; });
+        }
     </script>
+<script src="assets/sidebar.js"></script>
 </body></html>

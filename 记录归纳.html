@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>PhysicsLab Pro - 记录归纳</title>
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -121,7 +122,7 @@
 <body class="bg-surface text-on-surface font-body-md overflow-x-hidden gradient-mesh min-h-screen">
 <!-- TopAppBar -->
 <nav class="bg-surface-container-low shadow-sm fixed top-0 left-0 w-full z-50 flex justify-between items-center px-stage-margin py-unit h-16">
-<div class="text-headline-sm font-headline-sm font-bold text-primary">PhysicsLab Pro</div>
+<div class="text-headline-sm font-headline-sm font-bold text-primary"><img src="assets/logo.jpg" alt="科大讯飞" class="h-12"/></div>
 <div class="hidden md:flex gap-8 items-center h-full">
 <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-caps font-label-caps" href="提出问题.html">提出问题</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-caps font-label-caps" href="lesson-balance.html">动手实验</a>
@@ -140,7 +141,59 @@
 </div>
 </div>
 </nav>
-<main class="pt-24 pb-20 px-stage-margin max-w-7xl mx-auto">
+<!-- SideNavBar -->
+<aside id="sidebar" class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col bg-white shadow-md w-control-panel-width transition-all duration-300 overflow-hidden">
+<div class="p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">science</span>
+<div class="sidebar-text overflow-hidden whitespace-nowrap">
+<span class="text-label-caps font-label-caps font-black text-on-surface block">初中实验室</span>
+<p class="text-xs text-on-surface-variant">第一章：力学</p>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<div class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl m-2 p-3 flex items-center gap-4 translate-x-1 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined">science</span>
+<span class="text-label-caps font-label-caps sidebar-text">力学实验</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-label-caps font-label-caps sidebar-text">光学探究</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-label-caps font-label-caps sidebar-text">电磁工作台</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-on-surface rounded-xl m-2 p-3 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">thermostat</span>
+<span class="text-label-caps font-label-caps sidebar-text">热学实验室</span>
+</div>
+</nav>
+<div class="p-4 bg-primary-fixed rounded-2xl m-4 sidebar-content">
+<p class="text-sm font-bold text-on-primary-fixed-variant mb-2">掌握进度</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[75%]"></div>
+</div>
+<p class="text-xs mt-2 text-on-primary-fixed-variant">75% - 记录归纳阶段</p>
+</div>
+<div class="p-2 flex flex-col gap-1">
+<div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-caps font-label-caps sidebar-text">帮助</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">history</span>
+<span class="text-label-caps font-label-caps sidebar-text">历史</span>
+</div>
+</div>
+<!-- Collapse Toggle -->
+<div class="p-2 border-t border-outline-variant">
+<button id="sidebarToggle" onclick="toggleSidebar()" class="w-full flex items-center justify-center gap-2 p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" id="toggleIcon">left_panel_close</span>
+<span class="sidebar-text text-xs">收起侧栏</span>
+</button>
+</div>
+</aside>
+<main class="ml-control-panel-width pt-24 pb-20 px-stage-margin max-w-7xl mx-auto transition-all duration-300">
 <!-- Header Section -->
 <header class="mb-10 text-center md:text-left">
 <h1 class="text-headline-md font-headline-md text-on-surface mb-2">二力平衡：规律探索与归纳</h1>
@@ -158,78 +211,30 @@
 <table class="w-full border-collapse">
 <thead>
 <tr class="bg-surface-container-high text-on-surface-variant">
-<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">实验组合</th>
-<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">左侧拉力 (N)</th>
-<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">右侧拉力 (N)</th>
-<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">作用线状态</th>
-<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">物体状态</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">序号</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">F1</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">F2</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">合力</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">共线</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">同体</th>
+<th class="p-4 text-left font-label-caps text-label-caps border-b border-outline-variant">状态</th>
 </tr>
 </thead>
-<tbody class="text-body-md">
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="p-4 border-b border-outline-variant font-medium">组合 1</td>
-<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
-<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
-<td class="p-4 border-b border-outline-variant">
-<span class="px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary text-xs font-bold">共线</span>
-</td>
-<td class="p-4 border-b border-outline-variant">
-<select class="form-select w-full rounded-lg border-outline-variant text-sm focus:ring-primary focus:border-primary">
-<option selected="">静止 (平衡)</option>
-<option>向左加速</option>
-<option>向右加速</option>
-<option>转动</option>
-</select>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="p-4 border-b border-outline-variant font-medium">组合 2</td>
-<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">30.0</span></td>
-<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
-<td class="p-4 border-b border-outline-variant">
-<span class="px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary text-xs font-bold">共线</span>
-</td>
-<td class="p-4 border-b border-outline-variant">
-<select class="form-select w-full rounded-lg border-outline-variant text-sm focus:ring-primary focus:border-primary">
-<option>静止 (平衡)</option>
-<option>向左加速</option>
-<option selected="">向右加速</option>
-<option>转动</option>
-</select>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="p-4 border-b border-outline-variant font-medium">组合 3</td>
-<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
-<td class="p-4 border-b border-outline-variant"><span class="digital-display px-2 py-0.5 rounded text-sm">50.0</span></td>
-<td class="p-4 border-b border-outline-variant">
-<span class="px-2 py-1 rounded-full bg-error-container/20 text-error text-xs font-bold">不共线</span>
-</td>
-<td class="p-4 border-b border-outline-variant">
-<select class="form-select w-full rounded-lg border-outline-variant text-sm focus:ring-primary focus:border-primary">
-<option>静止 (平衡)</option>
-<option>向左加速</option>
-<option>向右加速</option>
-<option selected="">转动 (非平衡)</option>
-</select>
-</td>
-</tr>
+<tbody id="syncRecordList" class="text-body-md">
+<tr class="text-on-surface-variant text-center"><td colspan="7" class="py-6">暂无记录，请先在"动手实验"页记录数据</td></tr>
 </tbody>
 </table>
+</div>
+<!-- Dynamic Diagrams -->
+<div id="syncDiagrams" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
 </div>
 </div>
 <!-- Simulation Visual Hint (Responsive Image) -->
 <div class="relative rounded-xl overflow-hidden stage-shadow aspect-video group">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean, professional physics laboratory setup for exploring forces. The image features a digital wooden block on a friction-less surface with two vibrant red vector arrows representing pulling forces in opposite directions. The scene is illuminated with bright, even laboratory lighting. Overlay elements include a high-contrast digital scale and data-mono measurement readouts in a modern, educational tech style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8qUm4nDU4ebWD1k80KMwOjcIT0DukCo9SaZEd37r0z8hvK8RgARcPOIbgfd6OqGib5s_L3vlkCTFh0C9Ey7hz0wq2gul93PkhVTrbUoOi7MdmsExi4ssCw0FYIbFPNnN9hF6eiqEjo1MTNj_VfuW_ErC6IWw87PCRGq07OYV9tvqWKDlnxT_2yhtFwS8yN6GS_-dmehQeSNtKXlbFJ-Wt97FenhB1jhSfhEdrwF5RpeVr15Qrkq-SPazKfMfZFZnfFsIXw2rbj8w"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-<div class="text-white">
-<p class="font-bold text-lg mb-1">回顾实验场景</p>
-<p class="text-sm opacity-80">保持左侧 50N，调节右侧力并观察矢量箭头的变化。</p>
-</div>
-</div>
-<button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/90 text-white w-16 h-16 rounded-full flex items-center justify-center tactile-btn shadow-lg">
-<span class="material-symbols-outlined text-4xl filled-icon">play_arrow</span>
-</button>
+<video class="w-full h-full object-cover" controls poster="">
+<source src="assets/二力平衡.mp4" type="video/mp4">
+您的浏览器不支持视频播放。
+</video>
 </div>
 </section>
 <!-- Right: Induction Section -->
@@ -342,4 +347,95 @@
             });
         });
     </script>
+<script>
+// Load experiment records from localStorage (synced from lesson-balance.html)
+(function() {
+    const records = JSON.parse(localStorage.getItem('balanceRecords') || '[]');
+    const tbody = document.getElementById('syncRecordList');
+    const diagrams = document.getElementById('syncDiagrams');
+    if (!tbody || records.length === 0) return;
+
+    // Table
+    tbody.innerHTML = records.map((r, idx) => `
+        <tr class="hover:bg-surface-container-low transition-colors duration-150">
+            <td class="p-4 border-b border-outline-variant font-medium">${idx + 1}</td>
+            <td class="p-4 border-b border-outline-variant">${r.left}</td>
+            <td class="p-4 border-b border-outline-variant">${r.right}</td>
+            <td class="p-4 border-b border-outline-variant text-data-mono">${r.net} N</td>
+            <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-full ${r.collinear === '\u662f' ? 'bg-tertiary-container/10 text-tertiary' : 'bg-error-container/20 text-error'} text-xs font-bold">${r.collinear === '\u662f' ? '\u5171\u7ebf' : '\u4e0d\u5171\u7ebf'}</span></td>
+            <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-full ${r.sameBody === '\u662f' ? 'bg-tertiary-container/10 text-tertiary' : 'bg-error-container/20 text-error'} text-xs font-bold">${r.sameBody === '\u662f' ? '\u540c\u4f53' : '\u4e0d\u540c\u4f53'}</span></td>
+            <td class="p-4 border-b border-outline-variant"><span class="px-2 py-1 rounded-lg ${r.status === '\u5e73\u8861' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-error-container text-on-error-container'}">${r.status}</span></td>
+        </tr>
+    `).join('');
+
+    // Diagrams
+    if (!diagrams) return;
+    diagrams.innerHTML = records.map((r, idx) => {
+        const f1Match = r.left.match(/([\d.]+)N\s*(-?\d+)/);
+        const f2Match = r.right.match(/([\d.]+)N\s*(-?\d+)/);
+        const f1Val = f1Match ? parseFloat(f1Match[1]) : 5;
+        const f1Deg = f1Match ? parseInt(f1Match[2]) : 180;
+        const f2Val = f2Match ? parseFloat(f2Match[1]) : 5;
+        const f2Deg = f2Match ? parseInt(f2Match[2]) : 0;
+        const f1Rad = f1Deg * Math.PI / 180;
+        const f2Rad = f2Deg * Math.PI / 180;
+        const isBalanced = r.status === '\u5e73\u8861';
+        const statusColor = isBalanced ? '#00632e' : '#ba1a1a';
+        const statusIcon = isBalanced ? '\u2713' : '\u2717';
+
+        // Arrow length proportional to force (12px per N)
+        const scale = 12;
+        const f1Len = f1Val * scale;
+        const f2Len = f2Val * scale;
+
+        // Block center at (250,95), block 100x44
+        const cx = 250, cy = 95;
+        const bw = 50, bh = 22;
+
+        const f1StartX = cx + bw * Math.cos(f1Rad);
+        const f1StartY = cy + bh * Math.sin(f1Rad);
+        const f1EndX = f1StartX + f1Len * Math.cos(f1Rad);
+        const f1EndY = f1StartY + f1Len * Math.sin(f1Rad);
+
+        const f2StartX = cx + bw * Math.cos(f2Rad);
+        const f2StartY = cy + bh * Math.sin(f2Rad);
+        const f2EndX = f2StartX + f2Len * Math.cos(f2Rad);
+        const f2EndY = f2StartY + f2Len * Math.sin(f2Rad);
+
+        // Arrowhead: extends BEYOND the line end, not overlapping
+        function arrowHead(ex, ey, angle, color) {
+            const hl = 18;
+            const hw = 0.35;
+            // Tip is ahead of line end
+            const tipX = ex + 5 * Math.cos(angle);
+            const tipY = ey + 5 * Math.sin(angle);
+            const p1x = tipX - hl * Math.cos(angle - hw);
+            const p1y = tipY - hl * Math.sin(angle - hw);
+            const p2x = tipX - hl * Math.cos(angle + hw);
+            const p2y = tipY - hl * Math.sin(angle + hw);
+            return '<polygon points="'+tipX+','+tipY+' '+p1x+','+p1y+' '+p2x+','+p2y+'" fill="'+color+'"/>';
+        }
+
+        const f1MidX = (f1StartX + f1EndX) / 2;
+        const f1MidY = (f1StartY + f1EndY) / 2 - 16;
+        const f2MidX = (f2StartX + f2EndX) / 2;
+        const f2MidY = (f2StartY + f2EndY) / 2 + 24;
+
+        return '<div class="bg-surface-container-low rounded-xl p-6 text-center">' +
+            '<p class="font-bold text-on-surface mb-4" style="font-size:20px">\u8bb0\u5f55 '+(idx+1)+'</p>' +
+            '<svg viewBox="0 0 500 200" width="100%">' +
+            '<rect x="200" y="73" width="100" height="44" rx="6" fill="#0071bc" stroke="#005894" stroke-width="2.5"/>' +
+            '<text x="250" y="101" text-anchor="middle" font-size="18" fill="white" font-weight="bold">\u7269\u4f53</text>' +
+            '<line x1="'+f1StartX+'" y1="'+f1StartY+'" x2="'+f1EndX+'" y2="'+f1EndY+'" stroke="#ad3300" stroke-width="5"/>' +
+            arrowHead(f1EndX, f1EndY, f1Rad, '#ad3300') +
+            '<text x="'+f1MidX+'" y="'+f1MidY+'" text-anchor="middle" font-size="15" fill="#ad3300" font-weight="bold">'+f1Val+'N</text>' +
+            '<line x1="'+f2StartX+'" y1="'+f2StartY+'" x2="'+f2EndX+'" y2="'+f2EndY+'" stroke="#ad3300" stroke-width="5"/>' +
+            arrowHead(f2EndX, f2EndY, f2Rad, '#ad3300') +
+            '<text x="'+f2MidX+'" y="'+f2MidY+'" text-anchor="middle" font-size="15" fill="#ad3300" font-weight="bold">'+f2Val+'N</text>' +
+            '<text x="250" y="188" text-anchor="middle" font-size="20" fill="'+statusColor+'" font-weight="bold">'+statusIcon+' '+r.status+'</text>' +
+            '</svg></div>';
+    }).join('');
+})();
+</script>
+<script src="assets/sidebar.js"></script>
 </body></html>
